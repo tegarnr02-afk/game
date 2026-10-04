@@ -1,0 +1,6248 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Nunito:wght@400;700;800;900&family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&display=swap");
+
+/* ═══════════════════════════════════════════════════════
+   DAFTAR ISI
+   (urutan blok SENGAJA dipertahankan karena cascade)
+
+   01. Tokens
+   02. Reset & Base
+   03. Background Bintang
+   04. Header & Tombol Umum
+   05. Face Canvas & Animasi Umum
+   06. Home Screen (lama)
+   07. Box / Game Screen (lama) + Popup
+   08. Locked Screen
+   09. Game Body & Home Game (topbar, hero, stage, footer)
+   10. Responsive Home (tablet portrait & mobile)
+   11. Premium / Upgrade Modal
+   12. Box / Stage Game Screen (avatar + notes) & responsive
+   13. Home — Responsive Semua Ukuran (HARUS DI BAWAH 12)
+   14. Ensiklopedia Bahan Aktif
+   15. Settings Modal
+   16. Splash / Loading
+   17. Login / Register (versi kartu)
+   18. Login / Register (versi gambar login.webp)
+═══════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════
+   01. TOKENS
+═══════════════════════════════════════════════════════ */
+:root {
+  --pink: #ff69b4;
+  --pink-light: #ffb3d9;
+  --pink-pale: #fff0f8;
+  --blue: #4fc3f7;
+  --blue-light: #b3e5fc;
+  --blue-dark: #0288d1;
+  --purple: #c084fc;
+  --bg: linear-gradient(135deg, #ffe4f3 0%, #e8f4ff 50%, #f0e8ff 100%);
+  --card-bg: linear-gradient(160deg,
+      rgba(255, 255, 255, 0.82),
+      rgba(240, 248, 255, 0.9));
+  --shadow-pink: 0 8px 32px rgba(255, 105, 180, 0.18);
+  --shadow-hover: 0 16px 42px rgba(255, 105, 180, 0.3);
+  --radius: 22px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   02. RESET & BASE
+═══════════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+/* ═══════════════════════════════════════════════════════
+   03. BACKGROUND BINTANG
+═══════════════════════════════════════════════════════ */
+.star-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.3);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   04. HEADER & TOMBOL UMUM
+═══════════════════════════════════════════════════════ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 32px;
+  background: linear-gradient(90deg,
+      rgba(255, 182, 219, 0.88),
+      rgba(176, 226, 255, 0.88));
+  backdrop-filter: blur(14px);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 2px 18px rgba(255, 105, 180, 0.14);
+}
+
+.site-title {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #e91e8c;
+  letter-spacing: 1px;
+}
+
+.music-btn {
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff69b4, #4fc3f7);
+  border: none;
+  border-radius: 50px;
+  padding: 8px 20px;
+  color: #fff;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 14px rgba(255, 105, 180, 0.32);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.music-btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 7px 22px rgba(255, 105, 180, 0.44);
+}
+
+.main-wrap {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 88px 24px 32px;
+  min-height: 100vh;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+  padding: 11px 30px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ff69b4, #e91e8c);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(233, 30, 140, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(233, 30, 140, 0.42);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #4fc3f7, #0288d1);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(2, 136, 209, 0.25);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(2, 136, 209, 0.35);
+}
+
+.ms-auto {
+  margin-left: auto;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════
+   05. FACE CANVAS & ANIMASI UMUM
+═══════════════════════════════════════════════════════ */
+.face-canvas {
+  border-radius: 50%;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
+  display: block;
+}
+
+.disclaimer {
+  display: none;
+}
+
+@keyframes float-y {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.float-anim {
+  animation: float-y 3.2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════
+   06. HOME SCREEN (lama)
+═══════════════════════════════════════════════════════ */
+.home-screen {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+.home-intro {
+  text-align: center;
+}
+
+.home-heading {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #e91e8c;
+  margin-bottom: 6px;
+}
+
+.home-sub {
+  color: #9e9e9e;
+  font-size: 0.95rem;
+}
+
+.mirror-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.mirror-box {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 2.5px solid rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow-pink);
+  padding: 18px 14px 16px;
+  cursor: pointer;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s,
+    border-color 0.25s;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mirror-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg,
+      rgba(255, 182, 219, 0.15),
+      rgba(176, 226, 255, 0.15));
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.mirror-box:hover::before,
+.mirror-box.selected::before {
+  opacity: 1;
+}
+
+.mirror-box:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.mirror-box.selected {
+  border-color: var(--pink);
+  box-shadow:
+    0 0 0 3px rgba(255, 105, 180, 0.38),
+    var(--shadow-hover);
+  transform: translateY(-7px);
+}
+
+.mirror-box.locked {
+  cursor: not-allowed;
+  opacity: 0.83;
+}
+
+.box-label {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #e91e8c;
+  margin-bottom: 8px;
+}
+
+.face-wrap {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 8px;
+}
+
+.box-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #555;
+  margin-bottom: 2px;
+}
+
+.box-condition {
+  font-size: 0.72rem;
+  color: #aaa;
+  line-height: 1.4;
+}
+
+.locked-badge {
+  display: inline-block;
+  margin-top: 6px;
+  background: linear-gradient(135deg, #9e9e9e, #757575);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 3px 12px;
+  letter-spacing: 0.8px;
+}
+
+.preview-area {
+  background: linear-gradient(135deg,
+      rgba(255, 182, 219, 0.22),
+      rgba(176, 226, 255, 0.22));
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.82);
+  padding: 18px 26px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  box-shadow: 0 4px 22px rgba(255, 105, 180, 0.1);
+}
+
+.preview-face {
+  flex-shrink: 0;
+}
+
+.preview-title {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #c2185b;
+  margin-bottom: 5px;
+}
+
+.preview-desc {
+  font-size: 0.85rem;
+  color: #888;
+  line-height: 1.55;
+}
+
+.btn-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════════════════════════════
+   07. BOX / GAME SCREEN (lama) + POPUP
+═══════════════════════════════════════════════════════ */
+.box-screen {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.game-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  background: linear-gradient(135deg,
+      rgba(255, 182, 219, 0.28),
+      rgba(176, 226, 255, 0.28));
+  border-radius: 18px;
+  padding: 14px 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.82);
+  box-shadow: var(--shadow-pink);
+}
+
+.game-face {
+  flex-shrink: 0;
+}
+
+.game-title {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #c2185b;
+}
+
+.game-sub {
+  font-size: 0.82rem;
+  color: #aaa;
+  margin-top: 2px;
+}
+
+.hint-bar {
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-size: 0.88rem;
+  color: #5c6bc0;
+  border: 1.5px dashed #90caf9;
+  width: 100%;
+  min-height: 46px;
+  text-align: center;
+  line-height: 1.5;
+  transition: all 0.3s;
+}
+
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.ingr-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 2.5px solid rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 18px rgba(255, 105, 180, 0.12);
+  padding: 10px 6px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    transform 0.22s,
+    box-shadow 0.22s,
+    border-color 0.22s;
+}
+
+.ingr-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(255, 105, 180, 0.24);
+}
+
+.ingr-card.sel-1 {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.38);
+}
+
+.ingr-card.sel-2 {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.38);
+}
+
+.ingr-card.used {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.ingr-icon {
+  font-size: 2.1rem;
+  margin-bottom: 7px;
+  display: block;
+}
+
+.ingr-name {
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #666;
+  line-height: 1.3;
+}
+
+/* ── Popup ── */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(80, 20, 60, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.popup-overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.popup-box {
+  position: relative;
+  background: linear-gradient(160deg, #ffeaf4 0%, #fff5fa 100%);
+  border-radius: 32px;
+  border: 5px solid #ff8fc4;
+  box-shadow:
+    0 20px 60px rgba(233, 30, 140, 0.35),
+    inset 0 0 0 3px #fff;
+  padding: 30px 36px 32px;
+  max-width: 560px;
+  width: 92%;
+  text-align: center;
+  transform: scale(0.84);
+  transition: transform 0.3s;
+  overflow: hidden;
+}
+
+.popup-overlay.show .popup-box {
+  transform: scale(1);
+}
+
+.popup-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background: linear-gradient(135deg, #ff6fb3, #e91e8c);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(233, 30, 140, 0.4);
+}
+
+.popup-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 50px;
+  padding: 8px 26px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  margin-bottom: 18px;
+  font-family: "Baloo 2", "Nunito", sans-serif;
+}
+
+.status-good {
+  background: linear-gradient(180deg, #e8ffee, #c8f7d4);
+  color: #1b8a3f;
+  border: 2px solid #7ee89a;
+  box-shadow: 0 4px 10px rgba(126, 232, 154, 0.35);
+}
+
+.status-caution {
+  background: linear-gradient(180deg, #fff8e1, #ffe9b3);
+  color: #b8720a;
+  border: 2px solid #ffca28;
+  box-shadow: 0 4px 10px rgba(255, 202, 40, 0.35);
+}
+
+.status-danger {
+  background: #e53935;
+  color: #fff;
+}
+
+.popup-title {
+  font-family: "Fredoka", "Baloo 2", "Nunito", sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 700;
+  color: #e91e8c;
+  margin-bottom: 16px;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+}
+
+.popup-title::before {
+  content: "♥ ";
+  color: #ff8fc4;
+}
+
+.popup-title::after {
+  content: " ♥";
+  color: #ff8fc4;
+}
+
+.popup-desc {
+  font-size: 0.92rem;
+  color: #c2185b;
+  line-height: 1.65;
+  background: rgba(255, 255, 255, 0.6);
+  border: 2px dashed #ffb3d9;
+  border-radius: 18px;
+  padding: 16px 20px;
+}
+
+.popup-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #a06a1f;
+  line-height: 1.5;
+  margin-top: 14px;
+  background: rgba(255, 236, 179, 0.55);
+  border-radius: 14px;
+  padding: 8px 14px;
+  text-align: left;
+  font-style: normal;
+}
+
+.popup-note::before {
+  content: "⚠️";
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.popup-buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+/* ═══════════════════════════════════════════════════════
+   08. LOCKED SCREEN
+═══════════════════════════════════════════════════════ */
+.locked-screen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.locked-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 2.5px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-pink);
+  padding: 44px 48px;
+  text-align: center;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.locked-face {
+  margin-bottom: 8px;
+}
+
+.locked-badge-big {
+  background: linear-gradient(135deg, #9e9e9e, #616161);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 24px;
+  padding: 6px 20px;
+  letter-spacing: 1px;
+}
+
+.locked-title {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.locked-condition {
+  font-size: 0.88rem;
+  color: #9e9e9e;
+}
+
+.locked-msg {
+  font-size: 0.84rem;
+  color: #bbb;
+  line-height: 1.55;
+}
+
+/* ═══════════════════════════════════════════════════════
+   09. GAME BODY & HOME GAME
+═══════════════════════════════════════════════════════ */
+.game-body {
+  margin: 0;
+  padding: 0;
+  font-family: "Quicksand", sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  user-select: none;
+}
+
+.home-game {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #d6f0ff;
+  background-size: 100% 100%;
+  background-position: center;
+  overflow: hidden;
+}
+
+/* ── Top bar ── */
+.game-topbar {
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 8px 14px 0;
+  padding: 7px clamp(14px, 2vw, 30px);
+  min-height: clamp(52px, 7vh, 76px);
+  background: rgba(255, 255, 255, 0.94);
+  border: 2px solid rgba(139, 204, 255, 0.7);
+  border-radius: 24px;
+  box-shadow: 0 4px 18px rgba(56, 145, 204, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.game-logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1rem, 2.4vw, 1.6rem);
+}
+
+.logo-brand {
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+.logo-text {
+  color: #078fc8;
+}
+
+.logo-salon {
+  color: #ed347e;
+}
+
+.logo-img {
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.logo-img-desktop {
+  display: block;
+  height: clamp(36px, 4.5vw, 58px);
+}
+
+.logo-img-mobile {
+  display: none;
+  height: clamp(34px, 4.2vw, 48px);
+}
+
+.game-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 1vw, 12px);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 2px solid #b8e2ff;
+  border-radius: 50px;
+  padding: 6px clamp(10px, 1.4vw, 18px);
+  background: linear-gradient(180deg, #fff 0%, #e8f6ff 100%);
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.68rem, 0.85vw, 0.82rem);
+  color: #0872b8;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+
+.nav-btn:hover,
+.nav-btn:visited,
+.nav-btn:active {
+  text-decoration: none;
+}
+
+.nav-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 14px rgba(8, 114, 184, 0.18);
+}
+
+.nav-btn-green {
+  background: linear-gradient(135deg, #1abfb0, #00a88c);
+  border-color: #90e8da;
+  color: #fff;
+}
+
+.nav-btn-green:hover {
+  box-shadow: 0 4px 14px rgba(0, 168, 140, 0.3);
+}
+
+/* ── Layout utama ── */
+.game-main {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.home-main {
+  position: relative;
+  padding: clamp(8px, 1.5vh, 14px) clamp(16px, 2.2vw, 32px) 0;
+  gap: 0;
+  align-items: center;
+}
+
+/* ── Hero kiri ── */
+.home-copy {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 33%;
+  flex: none;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-tagline {
+  position: absolute;
+  top: 6%;
+  left: 5%;
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.8rem, 1.1vw, 1.05rem);
+  color: #3d8a8a;
+  line-height: 1.5;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+}
+
+.hero-tagline p::after {
+  content: " ♥";
+  color: #54c6c2;
+}
+
+.hero-text {
+  position: absolute;
+  bottom: 10%;
+  left: 45%;
+  z-index: 5;
+  width: max-content;
+  max-width: 55%;
+}
+
+.hero-heading-art {
+  display: block;
+  width: min(100%, 360px);
+  height: auto;
+  transform: translateY(15px);
+  filter: drop-shadow(0 3px 4px rgba(5, 100, 160, 0.18));
+}
+
+.hero-sub-art {
+  display: block;
+  width: min(65%, 210px);
+  height: auto;
+  margin: -18px auto 0;
+}
+
+.hero-title {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.7rem, 3.8vw, 3.8rem);
+  line-height: 1.08;
+  color: #078fc8;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.7);
+  filter: drop-shadow(0 3px 4px rgba(5, 100, 160, 0.2));
+}
+
+.hero-glow {
+  display: block;
+  color: #f02f84;
+}
+
+.hero-sub {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 14px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: clamp(0.74rem, 1vw, 0.96rem);
+  color: #157ab0;
+  line-height: 1.5;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #c8e9ff;
+  border-radius: 14px;
+}
+
+/* ── Stage grid ── */
+.stage-grid {
+  position: relative;
+  z-index: 2;
+  width: 66%;
+  height: 100%;
+  flex: none;
+  margin-left: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  align-content: center;
+  align-items: center;
+  gap: clamp(8px, 1.2vw, 16px);
+  padding: clamp(8px, 1.2vh, 14px) clamp(8px, 1.5vw, 24px);
+}
+
+.stage-image-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 620 / 374;
+  min-height: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  cursor: default;
+  transform-origin: center bottom;
+  transition:
+    transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.25s ease;
+  will-change: transform, filter;
+}
+
+.stage-image-card:not(.is-locked) {
+  cursor: pointer;
+}
+
+.stage-image-card:not(.is-locked):hover {
+  transform: translateY(-9px) scale(1.045) rotate(-1deg);
+  filter: brightness(1.07) drop-shadow(0 16px 22px rgba(44, 107, 159, 0.32));
+}
+
+.stage-image-card.is-locked {
+  opacity: 0.88;
+  filter: saturate(0.7);
+  cursor: pointer;
+}
+
+.stage-image-card.is-locked:hover {
+  opacity: 1;
+  transform: translateY(-9px) scale(1.045) rotate(1deg);
+  filter: saturate(0.95) brightness(1.05) drop-shadow(0 16px 22px rgba(116, 67, 211, 0.32));
+}
+
+.stage-image-card:not(.is-locked) .stage-art {
+  animation: stage-idle-bob 3.6s ease-in-out infinite;
+}
+
+@keyframes stage-idle-bob {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.stage-image-card:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 5px;
+  border-radius: 24px;
+}
+
+@media (hover: none) {
+  .stage-image-card:not(.is-locked) .stage-art {
+    animation: none;
+  }
+
+  .stage-image-card:not(.is-locked):active {
+    transform: translateY(-4px) scale(0.96);
+    filter: brightness(1.1) drop-shadow(0 10px 16px rgba(44, 107, 159, 0.3));
+    transition:
+      transform 0.12s ease-out,
+      filter 0.12s ease-out;
+  }
+
+  .stage-image-card.is-locked:active {
+    transform: translateY(-2px) scale(0.97);
+    filter: saturate(1) brightness(1.05) drop-shadow(0 10px 16px rgba(116, 67, 211, 0.3));
+    transition:
+      transform 0.12s ease-out,
+      filter 0.12s ease-out;
+  }
+}
+
+.stage-art {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Footer ── */
+.game-footer {
+  flex-shrink: 0;
+  align-self: center;
+  margin: 0 16px 10px;
+  padding: 10px 28px;
+  min-width: min(50%, 560px);
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.8rem, 1vw, 0.92rem);
+  color: #177ab8;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #b8e2ff;
+  border-radius: 28px;
+  backdrop-filter: blur(8px);
+}
+
+/* ═══════════════════════════════════════════════════════
+   10. RESPONSIVE HOME — tablet portrait & mobile
+═══════════════════════════════════════════════════════ */
+
+/* Tablet portrait (≤ 900px) */
+@media (max-width: 900px) and (orientation: portrait) {
+  .game-body {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .home-game {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .game-topbar {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 10px 0;
+    border-radius: 20px;
+  }
+
+  .game-nav {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .home-main {
+    flex-direction: column;
+    align-items: stretch;
+    overflow: visible;
+    padding: 0 14px 0;
+  }
+
+  .home-copy {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: clamp(190px, 30vh, 280px);
+    flex: none;
+  }
+
+  .hero-tagline {
+    top: 4%;
+    left: 2%;
+    font-size: 0.82rem;
+  }
+
+  .hero-text {
+    left: 38%;
+    bottom: 14%;
+    max-width: 62%;
+  }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 6vw, 3.4rem);
+  }
+
+  .hero-heading-art {
+    width: min(100%, 380px);
+  }
+
+  .hero-sub-art {
+    width: min(70%, 230px);
+  }
+
+  .hero-sub {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+    margin-top: 6px;
+  }
+
+  .stage-grid {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    grid-template-rows: repeat(2, auto);
+    padding-bottom: 12px;
+    gap: 10px;
+  }
+
+  .stage-image-card {
+    aspect-ratio: 620 / 374;
+  }
+
+  .game-footer {
+    width: calc(100% - 28px);
+    min-width: 0;
+    margin: 4px 14px 12px;
+  }
+}
+
+/* Mobile (≤ 560px) */
+@media (max-width: 560px) {
+  .game-body {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  .home-game {
+    width: 100%;
+    min-height: 100svh;
+    height: auto;
+    background-color: transparent !important;
+    background-image: var(--home-bg-mobile, var(--home-bg)) !important;
+    background-size: cover !important;
+    background-position: top center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .home-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-copy {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 52vh;
+    max-height: 420px;
+    background: none;
+    overflow: visible;
+    flex: none;
+    pointer-events: auto;
+  }
+
+  .hero-tagline {
+    top: 3%;
+    left: 3%;
+    font-size: 0.7rem;
+    padding: 6px 10px;
+  }
+
+  .hero-text {
+    top: 4%;
+    bottom: auto;
+    left: auto;
+    right: 4%;
+    max-width: 48%;
+  }
+
+  .hero-heading-art {
+    width: 100%;
+  }
+
+  .hero-sub-art {
+    width: 85%;
+    margin-top: 4px;
+  }
+
+  .game-topbar {
+    background: none;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    padding: 0;
+    margin: 10px 10px 0;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .game-logo {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .logo-img-desktop {
+    display: none;
+  }
+
+  .logo-img-mobile {
+    display: block;
+    height: clamp(46px, 20vw, 76px);
+    width: auto;
+    max-width: none;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.28));
+  }
+
+  .game-nav {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 3px 10px rgba(56, 145, 204, 0.18);
+    border-radius: 16px;
+    padding: 5px 6px;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 2px;
+  }
+
+  .nav-btn {
+    flex: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1px;
+    min-height: auto;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 3px 6px;
+    border-radius: 10px;
+  }
+
+  .nav-btn:hover {
+    transform: none;
+    box-shadow: none;
+    background: rgba(79, 195, 247, 0.12);
+  }
+
+  .nav-btn-green {
+    background: linear-gradient(135deg, #1abfb0, #00a88c);
+    border-color: transparent;
+    padding: 4px 7px;
+    box-shadow: none;
+  }
+
+  .nav-btn-green:hover {
+    box-shadow: none;
+    background: linear-gradient(135deg, #1abfb0, #00a88c);
+  }
+
+  .nav-icon {
+    font-size: 0.92rem;
+    line-height: 1;
+    filter: none;
+  }
+
+  .nav-btn-green .nav-icon {
+    filter: none;
+  }
+
+  .nav-label {
+    font-size: 0.42rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    white-space: nowrap;
+    color: #0872b8;
+    text-shadow: none;
+  }
+
+  .nav-btn-green .nav-label {
+    color: #fff;
+    text-shadow: none;
+  }
+
+  .stage-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: none;
+    gap: 10px;
+    padding: 0 4px 10px;
+    margin-top: -72px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .stage-image-card {
+    width: 100%;
+    margin-inline: 0;
+    touch-action: manipulation;
+  }
+
+  .game-footer {
+    width: calc(100% - 20px);
+    margin: 6px 10px 12px;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 8px 16px;
+    font-size: 0.7rem;
+    line-height: 1.35;
+  }
+}
+
+/* Mobile kecil (≤ 375px) */
+@media (max-width: 375px) {
+  .game-topbar {
+    margin: 4px;
+    padding: 7px 6px;
+  }
+
+  .game-logo {
+    font-size: 1.32rem;
+  }
+
+  .nav-btn {
+    min-height: 34px;
+    font-size: 0.54rem;
+  }
+
+  .hero-tagline {
+    font-size: 0.62rem;
+    padding: 5px 8px;
+  }
+
+  .hero-text {
+    max-width: 46%;
+  }
+
+  .hero-sub-art {
+    width: 80%;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   11. PREMIUM / UPGRADE MODAL
+═══════════════════════════════════════════════════════ */
+[x-cloak] {
+  display: none !important;
+}
+
+.upgrade-modal {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(70, 43, 104, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.upgrade-modal-card {
+  position: relative;
+  width: min(100%, 440px);
+  padding: 34px 34px 30px;
+  overflow: hidden;
+  text-align: center;
+  color: #69438d;
+  background: linear-gradient(145deg, #fffefe, #f4e9ff);
+  border: 4px solid #d1a8ff;
+  border-radius: 30px;
+  box-shadow:
+    0 18px 50px rgba(73, 41, 111, 0.3),
+    inset 0 0 0 5px rgba(255, 255, 255, 0.75);
+}
+
+.upgrade-modal-card::before {
+  content: "✦  ✧  ✦";
+  position: absolute;
+  top: 12px;
+  left: 0;
+  width: 100%;
+  color: #f0a43e;
+  letter-spacing: 22px;
+}
+
+.upgrade-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  color: #9c67cf;
+  font-size: 1.55rem;
+  line-height: 1;
+  cursor: pointer;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(111, 77, 152, 0.18);
+}
+
+.upgrade-icon {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  margin: 6px auto 10px;
+  border: 3px solid #ffe0a1;
+  border-radius: 50%;
+  font-size: 2.35rem;
+  background: linear-gradient(145deg, #fff4c7, #ffc15a);
+  box-shadow: 0 5px 12px rgba(238, 168, 48, 0.25);
+}
+
+.upgrade-kicker {
+  margin: 0 0 5px;
+  color: #a469dd;
+  font:
+    900 0.78rem "Baloo 2",
+    "Nunito",
+    sans-serif;
+  letter-spacing: 0.16em;
+}
+
+.upgrade-modal-card h2 {
+  margin: 0;
+  color: #7545aa;
+  font:
+    800 clamp(1.4rem, 4vw, 1.8rem) "Baloo 2",
+    "Nunito",
+    sans-serif;
+}
+
+.upgrade-modal-card>p:not(.upgrade-kicker) {
+  margin: 11px auto 20px;
+  max-width: 335px;
+  color: #7b668d;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.upgrade-modal-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.upgrade-primary,
+.upgrade-secondary {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font:
+    800 0.86rem "Baloo 2",
+    "Nunito",
+    sans-serif;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.upgrade-primary {
+  color: #fff;
+  background: linear-gradient(180deg, #c08aff, #7845d7);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.35),
+    0 5px 0 #6031b6;
+}
+
+.upgrade-secondary {
+  color: #9664c7;
+  background: transparent;
+}
+
+@media (max-width: 560px) {
+  .upgrade-modal-card {
+    padding: 31px 22px 24px;
+    border-radius: 24px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   12. BOX / STAGE GAME SCREEN — RESPONSIVE
+   Prinsip: semua ukuran di dalam avatar & notes memakai satuan `cqw`
+   (persen lebar panel itu sendiri), jadi otomatis ikut mengecil/membesar.
+   Layout:
+   1) Default         : 2 kolom (desktop, tablet landscape, HP landscape)
+   2) Portrait ≤900px : 1 kolom bertumpuk (HP & tablet portrait)
+═══════════════════════════════════════════════════════ */
+.box-game-wrap {
+  --topbar-h: 84px;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.box-topbar {
+  position: relative;
+  z-index: 30;
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(14px);
+}
+
+.box-main {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+  gap: 0;
+}
+
+/* ── Kolom avatar ── */
+.box-avatar-col {
+  flex: 0 0 40%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: clamp(10px, 1.5vh, 20px) clamp(8px, 1vw, 16px) 0;
+  position: relative;
+  container-type: inline-size;
+}
+
+.box-avatar-anchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+}
+
+.box-avatar-anchor::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 62%;
+  height: clamp(10px, 1.6vh, 18px);
+  background: radial-gradient(ellipse at center,
+      rgba(0, 0, 0, 0.28) 0%,
+      transparent 72%);
+  filter: blur(2px);
+}
+
+.box-avatar-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - var(--topbar-h) - 24px);
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28));
+  margin-bottom: 0;
+}
+
+/* Label stage — kiri atas halaman, di bawah navbar */
+.box-stage-label {
+  position: absolute;
+  top: calc(var(--topbar-h) + 4px);
+  left: clamp(10px, 2vw, 24px);
+  z-index: 30;
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: clamp(0.72rem, 1.1vw, 0.9rem);
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ff6fb3, #e91e8c);
+  border-radius: 50px;
+  padding: 7px 16px;
+  box-shadow: 0 4px 14px rgba(233, 30, 140, 0.35);
+  max-width: calc(100% - 20px);
+}
+
+/* Slot bahan (shadow box) */
+.avatar-slots {
+  position: absolute;
+  left: 50%;
+  top: 88%;
+  transform: translate(-50%, calc(-100% - 10cqw));
+  z-index: 3;
+  display: flex;
+  gap: 3cqw;
+}
+
+.avatar-slot {
+  width: clamp(60px, 19cqw, 108px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 4px;
+  border-radius: clamp(14px, 3.6cqw, 20px);
+  border: 3px dashed rgba(255, 255, 255, 0.85);
+  background: rgba(60, 20, 50, 0.32);
+  box-shadow: inset 0 4px 14px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(3px);
+  cursor: default;
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+}
+
+.slot-empty {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: clamp(9px, 2.3cqw, 12.5px);
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.avatar-slot.next {
+  border-color: var(--pink);
+  background: rgba(255, 105, 180, 0.28);
+  box-shadow:
+    inset 0 4px 14px rgba(0, 0, 0, 0.25),
+    0 0 18px rgba(255, 105, 180, 0.7);
+  transform: scale(1.06);
+}
+
+.avatar-slot.filled {
+  border-style: solid;
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 6px 18px rgba(233, 30, 140, 0.35);
+  cursor: pointer;
+  animation: slot-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.avatar-slot.filled:hover {
+  transform: scale(1.05);
+}
+
+.slot-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.slot-item img {
+  width: clamp(28px, 10cqw, 56px);
+  height: clamp(28px, 10cqw, 56px);
+  object-fit: contain;
+}
+
+.slot-name {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: clamp(8.5px, 2.1cqw, 11.5px);
+  line-height: 1.1;
+  color: #6a1b9a;
+  text-align: center;
+}
+
+@keyframes slot-pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Kotak kondisi */
+.box-condition-box {
+  position: absolute;
+  left: 50%;
+  top: 88%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: min(80%, 300px);
+  background: #fff;
+  border: 2px solid #ffd1e6;
+  border-radius: clamp(10px, 3cqw, 16px);
+  padding: clamp(6px, 2.2cqw, 12px) clamp(10px, 3.2cqw, 18px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  text-align: center;
+}
+
+.box-condition-label {
+  display: block;
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: clamp(10px, 2.5cqw, 14.7px);
+  letter-spacing: 0.3px;
+  color: #e91e8c;
+  margin-bottom: 4px;
+}
+
+.box-condition-desc {
+  font-size: clamp(9.5px, 2.5cqw, 14px);
+  font-weight: 800;
+  line-height: 1.4;
+  color: #0288d1;
+}
+
+/* Efek bintang & animasi avatar */
+.avatar-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.sparkle {
+  position: absolute;
+  line-height: 1;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  text-shadow:
+    0 0 8px currentColor,
+    0 0 16px rgba(255, 255, 255, 0.8);
+  animation: sparkle-pop var(--dur, 1.2s) ease-out var(--d, 0s) both;
+}
+
+@keyframes sparkle-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.25) rotate(60deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -110%) scale(0.2) rotate(200deg);
+  }
+}
+
+.box-avatar-img.avatar-swap {
+  animation: avatar-swap 0.95s ease-in-out;
+}
+
+@keyframes avatar-swap {
+  0% {
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28)) brightness(1);
+    transform: scale(1);
+  }
+
+  35% {
+    filter: drop-shadow(0 0 28px rgba(255, 213, 79, 0.95)) brightness(1.45) saturate(1.2);
+    transform: scale(1.04);
+  }
+
+  100% {
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28)) brightness(1);
+    transform: scale(1);
+  }
+}
+
+.box-avatar-img.avatar-shake {
+  animation: avatar-shake 0.6s ease-in-out;
+}
+
+@keyframes avatar-shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-8px) rotate(-1.5deg);
+  }
+
+  40% {
+    transform: translateX(8px) rotate(1.5deg);
+  }
+
+  60% {
+    transform: translateX(-6px);
+  }
+
+  80% {
+    transform: translateX(6px);
+  }
+}
+
+/* Feedback drop */
+.box-avatar-col.drop-ready .box-avatar-img {
+  transition:
+    filter 0.2s,
+    transform 0.2s;
+}
+
+.box-avatar-col.drop-over .box-avatar-img {
+  transform: scale(1.03);
+  filter: drop-shadow(0 0 22px rgba(255, 105, 180, 0.9)) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28));
+}
+
+.box-avatar-col.drop-ready::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 3px dashed rgba(255, 255, 255, 0.85);
+  border-radius: 28px;
+  pointer-events: none;
+}
+
+.box-avatar-col.drop-over::after {
+  border-color: var(--pink);
+  background: rgba(255, 105, 180, 0.12);
+}
+
+/* Ghost drag */
+.drag-ghost {
+  position: fixed;
+  z-index: 500;
+  transform: translate(-50%, -50%) scale(1.08) rotate(-4deg);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2.5px solid var(--pink);
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(233, 30, 140, 0.4);
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #6a1b9a;
+}
+
+.drag-ghost img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+/* ── Kolom kanan (notes) ── */
+.box-content-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: clamp(4px, 0.6vh, 8px) clamp(4px, 0.8vw, 12px);
+  overflow: hidden;
+}
+
+/* Lebar panel dibatasi tinggi layar supaya selalu muat tanpa scroll */
+.notes-panel {
+  position: relative;
+  width: min(100%, calc((100dvh - var(--topbar-h) - 16px) * 1320 / 910));
+  aspect-ratio: 1320 / 910;
+  align-self: center;
+  flex-shrink: 0;
+  container-type: inline-size;
+}
+
+.notes-bg-mobile {
+  display: none;
+}
+
+.notes-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 10px 30px rgba(255, 105, 180, 0.28));
+}
+
+.notes-content {
+  position: absolute;
+  inset: 7% 13% 6% 9%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3px, 0.9cqw, 9px);
+  overflow: hidden;
+}
+
+/* Judul */
+.notes-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  order: 0;
+  position: relative;
+  top: 6cqw;
+  left: 2.6cqw;
+}
+
+.notes-title-row .ingr-panel-title {
+  font-family: "Fredoka", "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: clamp(15px, 3.9cqw, 32px);
+  color: #c2185b;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* Hint */
+.notes-hint {
+  order: 1;
+  font-family: "Quicksand", sans-serif !important;
+  font-weight: 700 !important;
+  background: rgba(255, 236, 248, 0.72) !important;
+  border: 1.5px dashed #f48fb1 !important;
+  border-radius: 1.5cqw !important;
+  padding: 0.6cqw 1.7cqw !important;
+  font-size: clamp(9px, 1.75cqw, 14.7px) !important;
+  color: #ad1457 !important;
+  min-height: 3.9cqw !important;
+  text-align: center !important;
+  line-height: 1.4 !important;
+  flex-shrink: 0;
+  backdrop-filter: blur(3px);
+  max-width: 68% !important;
+  margin: 0 auto !important;
+  position: relative;
+  top: 7.9cqw;
+  left: 1.2cqw;
+}
+
+/* Grid bahan */
+.box-ingr-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.3cqw;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ingr-card {
+  position: relative;
+  border-width: 2px;
+  flex: 0 0 31%;
+  max-width: 31%;
+}
+
+.ingr-card:nth-child(5n + 1) {
+  background: linear-gradient(160deg, #ffe3f0, #fff);
+  border-color: #ffb3d9;
+}
+
+.ingr-card:nth-child(5n + 2) {
+  background: linear-gradient(160deg, #fff2d6, #fff);
+  border-color: #ffd699;
+}
+
+.ingr-card:nth-child(5n + 3) {
+  background: linear-gradient(160deg, #dcf0ff, #fff);
+  border-color: #a8dcff;
+}
+
+.ingr-card:nth-child(5n + 4) {
+  background: linear-gradient(160deg, #ece0ff, #fff);
+  border-color: #d0b3ff;
+}
+
+.ingr-card:nth-child(5n + 5) {
+  background: linear-gradient(160deg, #ffe3f0, #fff);
+  border-color: #ffb3d9;
+}
+
+.ingr-icon-img {
+  display: block;
+  object-fit: contain;
+  margin: 0 auto 5px;
+  filter: drop-shadow(0 3px 6px rgba(233, 30, 140, 0.18));
+  transition: transform 0.22s ease;
+}
+
+.ingr-card:hover .ingr-icon-img {
+  transform: scale(1.08);
+}
+
+.notes-content .box-ingr-grid {
+  order: 2;
+  flex: 1;
+  min-height: 0;
+  max-width: 100%;
+  align-content: center;
+  overflow: hidden;
+}
+
+.notes-content .ingr-card {
+  cursor: grab;
+  touch-action: none;
+  flex: 0 0 31% !important;
+  max-width: 31% !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(4px);
+  box-shadow:
+    0 4px 14px rgba(255, 105, 180, 0.24),
+    0 1px 3px rgba(0, 0, 0, 0.06) !important;
+  border-radius: clamp(8px, 1.8cqw, 15px) !important;
+  border-width: 2px !important;
+  padding: clamp(4px, 1.2cqw, 11px) clamp(3px, 0.75cqw, 8px) !important;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease !important;
+}
+
+.notes-content .ingr-card:hover {
+  transform: translateY(-5px) scale(1.04) !important;
+  box-shadow:
+    0 10px 24px rgba(255, 105, 180, 0.34),
+    0 2px 6px rgba(0, 0, 0, 0.08) !important;
+}
+
+.notes-content .ingr-card.placed {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.notes-content .ingr-card.dragging {
+  opacity: 0.35;
+}
+
+.notes-content .ingr-icon-img {
+  width: clamp(26px, 6.8cqw, 56px) !important;
+  height: clamp(26px, 6.8cqw, 56px) !important;
+  margin-bottom: 4px !important;
+}
+
+.notes-content .ingr-name {
+  font-family: "Baloo 2", "Nunito", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: clamp(8.5px, 1.75cqw, 14.4px) !important;
+  color: #6a1b9a !important;
+  line-height: 1.25 !important;
+}
+
+/* Tombol MIX & Reset */
+.notes-mix-row {
+  order: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.2cqw;
+  flex-shrink: 0;
+  padding-right: 20%;
+  position: relative;
+  top: -6.1cqw;
+}
+
+.btn-mix-notes {
+  flex: 0 1 auto;
+  max-width: 23cqw;
+  border: none;
+  border-radius: 50px;
+  padding: clamp(5px, 1.2cqw, 10px) clamp(11px, 2.9cqw, 24px);
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: clamp(10px, 1.85cqw, 15px);
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: linear-gradient(135deg, #ff4fa3 0%, #e91e8c 50%, #c2185b 100%);
+  box-shadow:
+    0 6px 22px rgba(233, 30, 140, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    opacity 0.2s;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.btn-mix-notes:not([disabled]):hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 12px 32px rgba(233, 30, 140, 0.55);
+}
+
+.btn-mix-notes[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: saturate(0.5);
+}
+
+.btn-reset-notes {
+  flex: none;
+  border: 2px solid rgba(244, 143, 177, 0.6);
+  border-radius: 50px;
+  padding: clamp(5px, 1.2cqw, 10px) clamp(10px, 2.4cqw, 20px);
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: clamp(9.5px, 1.7cqw, 14px);
+  color: #c2185b;
+  background: rgba(255, 255, 255, 0.82);
+  cursor: pointer;
+  transition:
+    transform 0.18s,
+    background 0.18s;
+  backdrop-filter: blur(4px);
+}
+
+.btn-reset-notes:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-reset-notes:hover {
+  background: rgba(255, 240, 248, 0.95);
+  transform: scale(1.05);
+}
+
+/* ── HP / tablet landscape pendek ── */
+@media (orientation: landscape) and (max-height: 520px) {
+  .box-game-wrap {
+    --topbar-h: 60px;
+  }
+
+  .box-topbar {
+    min-height: 44px;
+    padding: 3px 12px;
+    margin-top: 4px;
+  }
+
+  .box-topbar .logo-img-desktop {
+    height: 34px;
+  }
+
+  .box-topbar .nav-btn {
+    padding: 3px 12px;
+  }
+
+  .box-stage-label {
+    font-size: 11px;
+    padding: 4px 10px;
+    top: 52px;
+    left: 8px;
+  }
+}
+
+/* ── Portrait ≤900px (HP & tablet portrait) — 1 kolom bertumpuk ── */
+@media (max-width: 900px) and (orientation: portrait) {
+  .box-game-wrap {
+    height: auto;
+    min-height: 100dvh;
+    background-position: top center;
+  }
+
+  /* Navbar transparan, tombol dalam pill seperti home */
+  .game-topbar.box-topbar {
+    background: none !important;
+    backdrop-filter: none !important;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 8px 10px 0;
+    z-index: 20;
+  }
+
+  .box-topbar .game-nav {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 3px 10px rgba(56, 145, 204, 0.18);
+    border-radius: 16px;
+    padding: 5px 6px;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 2px;
+  }
+
+  .box-topbar .nav-btn {
+    flex: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1px;
+    min-height: auto;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 3px 6px;
+    border-radius: 10px;
+    width: auto;
+    aspect-ratio: unset;
+  }
+
+  .box-topbar .nav-btn-green {
+    background: linear-gradient(135deg, #1abfb0, #00a88c);
+    border-color: transparent;
+    padding: 4px 7px;
+    box-shadow: none;
+  }
+
+  .box-topbar .nav-icon {
+    font-size: 0.92rem;
+    line-height: 1;
+  }
+
+  .box-topbar .nav-label {
+    font-size: 0.42rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    white-space: nowrap;
+    color: #0872b8;
+    text-shadow: none;
+  }
+
+  .box-topbar .nav-btn-green .nav-label {
+    color: #fff;
+    text-shadow: none;
+  }
+
+
+  /* Kolom tengah dengan lebar maksimum, isi menempel ke dasar layar */
+  .box-main {
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 560px;
+    margin-inline: auto;
+    overflow: visible;
+    container-type: inline-size;
+  }
+
+  /* Avatar: tinggi tetap = 94% lebar kolom */
+  .box-avatar-col {
+    display: block;
+    flex: none;
+    width: 100%;
+    height: 94cqw;
+    padding: 0;
+    margin-top: -16cqw;
+    position: relative;
+    overflow: visible;
+  }
+
+  .box-avatar-anchor {
+    position: absolute;
+    inset: 0;
+    display: block;
+    max-width: none;
+  }
+
+  .box-avatar-anchor::after {
+    display: none;
+  }
+
+  .box-avatar-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    max-height: none;
+  }
+
+  /* Label stage (2 baris), tetap di kiri atas di bawah logo */
+  .box-stage-label {
+    display: block;
+    top: clamp(84px, 22vw, 96px);
+    left: clamp(10px, 3vw, 24px);
+    max-width: 34vw;
+    padding: 1.6vw 3vw;
+    border-radius: 5vw;
+    text-align: center;
+    font-size: clamp(9px, 2.6vw, 13px);
+    line-height: 1.15;
+  }
+
+  .box-stage-label span {
+    display: block;
+  }
+
+  .box-stage-label .stage-sep {
+    display: none;
+  }
+
+  /* Slot bahan */
+  .avatar-slots {
+    top: 57cqw;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 13cqw;
+  }
+
+  .avatar-slot {
+    width: 19cqw;
+    height: 19cqw;
+    aspect-ratio: auto;
+    flex: none;
+    padding: 4px;
+    border-radius: 4cqw;
+    border-width: 2px;
+  }
+
+  .slot-empty {
+    font-size: clamp(8px, 2.6cqw, 12px);
+  }
+
+  .slot-item img {
+    width: 10cqw;
+    height: 10cqw;
+  }
+
+  .slot-name {
+    font-size: clamp(8px, 2.2cqw, 11px);
+  }
+
+  /* Kotak kondisi */
+  .box-condition-box {
+    top: 78cqw;
+    width: 74%;
+    max-width: none;
+    padding: 2cqw 3cqw;
+    border-radius: 4cqw;
+    transform: translateX(-50%);
+  }
+
+  .box-condition-label {
+    font-size: clamp(10px, 3cqw, 14.5px);
+    margin-bottom: 1cqw;
+  }
+
+  .box-condition-desc {
+    font-size: clamp(9px, 2.6cqw, 13px);
+    line-height: 1.35;
+  }
+
+  /* Notes */
+  .box-content-col {
+    flex: none;
+    width: 100%;
+    margin-top: -1cqw;
+    padding: 0 0 12px;
+    overflow: visible;
+    position: relative;
+    z-index: 5;
+    justify-content: flex-start;
+  }
+
+  .notes-panel {
+    width: 100%;
+    aspect-ratio: 941 / 800;
+  }
+
+  .has-mobile-notes .notes-bg-mobile {
+    display: block;
+  }
+
+  .has-mobile-notes .notes-bg-desktop {
+    display: none;
+  }
+
+  .notes-content {
+    inset: 11.5% 15.5% 14% 15.7%;
+    gap: 1.5cqw;
+    overflow: visible;
+    justify-content: space-between;
+  }
+
+  .notes-content .notes-title-row,
+  .notes-content .notes-hint,
+  .notes-content .notes-mix-row {
+    position: static;
+    top: auto;
+    left: auto;
+  }
+
+  .notes-title-row .ingr-panel-title {
+    font-size: clamp(14px, 4.8cqw, 27px);
+    padding: 0.3cqw 5cqw;
+    border: 1.5px dashed #f48fb1;
+    border-radius: 3cqw;
+    background: rgba(255, 236, 248, 0.7);
+  }
+
+  .notes-content .notes-hint {
+    max-width: 100% !important;
+    min-height: 0 !important;
+    padding: 1cqw 3cqw !important;
+    border-radius: 3cqw !important;
+    font-size: clamp(8px, 2.4cqw, 13px) !important;
+  }
+
+  .notes-content .box-ingr-grid {
+    gap: 2.4cqw 2cqw;
+    overflow: visible;
+  }
+
+  .notes-content .ingr-card {
+    padding: 1.4cqw 1cqw !important;
+    border-radius: 3cqw !important;
+  }
+
+  .notes-content .ingr-icon-img {
+    width: 8cqw !important;
+    height: 8cqw !important;
+    margin-bottom: 0.6cqw !important;
+  }
+
+  .notes-content .ingr-name {
+    font-size: clamp(8px, 2.35cqw, 13.5px) !important;
+  }
+
+  .notes-mix-row {
+    padding-right: 0;
+    justify-content: center;
+    gap: 2.5cqw;
+  }
+
+  .btn-mix-notes {
+    max-width: none;
+    padding: 2.2cqw 7cqw;
+    font-size: clamp(12px, 3.6cqw, 17px);
+  }
+
+  .btn-reset-notes {
+    padding: 2cqw 4.5cqw;
+    font-size: clamp(10px, 3cqw, 14.5px);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   13. HOME — RESPONSIVE SEMUA UKURAN  (HARUS PALING BAWAH dari blok home)
+   • Portrait ≤900px : 1 kolom. Ukuran memakai --u (1% lebar layar,
+     maksimum 6.4px), kartu stage menempel di dasar layar.
+   • Landscape / desktop : 2 kolom. Lebar kartu dibatasi tinggi layar
+     supaya 2 baris kartu selalu muat tanpa scroll.
+═══════════════════════════════════════════════════════ */
+
+/* Portrait: HP & tablet */
+@media (max-width: 900px) and (orientation: portrait) {
+  .game-body {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .home-game {
+    --u: min(1vw, 6.4px);
+    width: min(100%, 640px);
+    margin-inline: auto;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: transparent !important;
+    background-image: var(--home-bg-mobile, var(--home-bg)) !important;
+    background-size: cover !important;
+    background-position: top center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .home-main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow: visible;
+    padding: 0 calc(var(--u) * 3.7);
+  }
+
+  /* Hero: tinggi mengikuti lebar, menimpa bagian atas kartu */
+  .home-copy {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: calc(var(--u) * 92);
+    max-height: none;
+    flex: none;
+    margin-bottom: calc(var(--u) * -19.2);
+    background: none;
+    overflow: visible;
+    pointer-events: auto;
+  }
+
+  .hero-tagline {
+    top: 3%;
+    left: 3%;
+    font-size: max(9px, calc(var(--u) * 3));
+    padding: calc(var(--u) * 1.6) calc(var(--u) * 2.7);
+  }
+
+  .hero-text {
+    top: 4%;
+    bottom: auto;
+    left: auto;
+    right: 4%;
+    max-width: 48%;
+  }
+
+  .hero-heading-art {
+    width: 100%;
+  }
+
+  .hero-sub-art {
+    width: 85%;
+    margin-top: calc(var(--u) * 1);
+  }
+
+  /* Kartu stage: selalu di dasar layar */
+  .home-main .stage-grid {
+    width: 100%;
+    height: auto;
+    margin: auto 0 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    gap: calc(var(--u) * 2.7);
+    padding: 0 calc(var(--u) * 1) calc(var(--u) * 2.7);
+    position: relative;
+    z-index: 3;
+  }
+
+  .stage-image-card {
+    width: 100%;
+    margin-inline: 0;
+    touch-action: manipulation;
+  }
+
+  .game-footer {
+    width: calc(100% - var(--u) * 5.3);
+    min-width: 0;
+    margin: calc(var(--u) * 1.6) calc(var(--u) * 2.7) calc(var(--u) * 3.2);
+    padding: calc(var(--u) * 2.1) calc(var(--u) * 4.3);
+    font-size: max(10px, calc(var(--u) * 3));
+    line-height: 1.35;
+  }
+}
+
+/* Landscape & desktop */
+@media (orientation: landscape),
+(min-width: 901px) {
+  :root {
+    --home-chrome: 150px;
+    /* topbar + footer + padding */
+  }
+
+  .game-body,
+  .home-game {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .stage-grid {
+    width: min(66%, calc((100dvh - var(--home-chrome)) * 1.6578 + 40px));
+  }
+}
+
+/* Landscape pendek (HP/tablet diputar) */
+@media (orientation: landscape) and (max-height: 520px) {
+  :root {
+    --home-chrome: 108px;
+  }
+
+  .game-topbar {
+    min-height: 44px;
+    padding: 3px 14px;
+    margin-top: 4px;
+  }
+
+  .game-topbar .logo-img-desktop {
+    height: 34px;
+  }
+
+  .game-topbar .nav-btn {
+    padding: 3px 12px;
+  }
+
+  .game-footer {
+    padding: 4px 16px;
+    margin-bottom: 4px;
+    font-size: 0.7rem;
+  }
+
+  .hero-tagline {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   14. ENSIKLOPEDIA BAHAN AKTIF
+═══════════════════════════════════════════════════════ */
+.ency-wrap {
+  --topbar-h: 84px;
+  --ency-accent: #ff6fb3;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ency-wrap.is-locked {
+  overflow: hidden;
+}
+
+.ency-topbar {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(14px);
+  position: sticky;
+  top: 8px;
+  z-index: 40;
+}
+
+.ency-main {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(10px, 2vw, 22px) clamp(10px, 2.4vw, 24px) clamp(16px, 3vw, 32px);
+}
+
+.ency-panel {
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(10px);
+  border: 3px solid #fff;
+  border-radius: clamp(20px, 3.4vw, 32px);
+  box-shadow: var(--shadow-pink);
+  padding: clamp(14px, 3vw, 32px);
+}
+
+/* Judul */
+.ency-head {
+  text-align: center;
+  margin-bottom: clamp(10px, 2vw, 18px);
+}
+
+.ency-title {
+  font-family: "Fredoka", "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4.4vw, 2.4rem);
+  color: #c2185b;
+  letter-spacing: 0.5px;
+}
+
+.ency-sub {
+  margin-top: 4px;
+  font-size: clamp(0.78rem, 2.2vw, 0.98rem);
+  font-weight: 700;
+  color: #0288d1;
+}
+
+/* Pencarian */
+.ency-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 560px;
+  margin: 0 auto clamp(10px, 2vw, 16px);
+  padding: 4px 16px;
+  background: #fff;
+  border: 2px solid #ffd1e6;
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(233, 30, 140, 0.1);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.ency-search:focus-within {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.25);
+}
+
+.ency-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  padding: 10px 0;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: max(16px, 0.95rem);
+  /* 16px mencegah zoom otomatis di iOS */
+  color: #6a1b9a;
+  user-select: text;
+}
+
+.ency-search input::placeholder {
+  color: #c9a0b8;
+  font-weight: 600;
+}
+
+/* Chip kategori: geser horizontal di layar sempit */
+.ency-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 2px 8px;
+  margin: 0 -2px clamp(6px, 1.4vw, 12px);
+  scrollbar-width: none;
+  justify-content: flex-start;
+}
+
+.ency-chips::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 760px) {
+  .ency-chips {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: visible;
+  }
+}
+
+.ency-chip {
+  flex: none;
+  border: 2px solid #ffd1e6;
+  background: #fff;
+  color: #c2185b;
+  border-radius: 50px;
+  padding: 7px 16px;
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    transform 0.15s,
+    background 0.15s,
+    color 0.15s;
+}
+
+.ency-chip:hover {
+  transform: translateY(-2px);
+}
+
+.ency-chip.is-active {
+  background: linear-gradient(135deg, #ff6fb3, #e91e8c);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(233, 30, 140, 0.35);
+}
+
+.ency-count {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #9a6a85;
+  margin-bottom: 10px;
+}
+
+/* Grid kartu */
+.ency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,
+      minmax(clamp(136px, 22vw, 210px), 1fr));
+  gap: clamp(8px, 1.6vw, 16px);
+}
+
+.ency-card {
+  --ency-accent: #ff6fb3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  padding: clamp(10px, 1.8vw, 16px) clamp(8px, 1.4vw, 12px);
+  background: linear-gradient(160deg,
+      #fff,
+      color-mix(in srgb, var(--ency-accent) 12%, #fff));
+  border: 2.5px solid color-mix(in srgb, var(--ency-accent) 55%, #fff);
+  border-radius: 20px;
+  box-shadow: 0 4px 14px rgba(255, 105, 180, 0.14);
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition:
+    transform 0.22s,
+    box-shadow 0.22s;
+}
+
+.ency-card:hover,
+.ency-card:focus-visible {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(255, 105, 180, 0.28);
+  outline: none;
+}
+
+.ency-card-icon,
+.ency-detail-icon {
+  display: grid;
+  place-items: center;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 700;
+  color: #c2185b;
+}
+
+.ency-card-icon {
+  width: clamp(52px, 9vw, 72px);
+  height: clamp(52px, 9vw, 72px);
+  font-size: 1.8rem;
+}
+
+.ency-card-icon img,
+.ency-detail-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 6px rgba(233, 30, 140, 0.2));
+}
+
+.ency-card-name {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: clamp(0.82rem, 1.6vw, 0.98rem);
+  line-height: 1.2;
+  color: #6a1b9a;
+}
+
+.ency-card-tag {
+  font-size: clamp(0.68rem, 1.3vw, 0.78rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: #7b668d;
+}
+
+.ency-card-cats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.ency-mini {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid #ffd1e6;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 700;
+  font-size: 0.66rem;
+  color: #c2185b;
+}
+
+/* Warna aksen per kategori */
+.ency-cat-pencerah {
+  --ency-accent: #ffb300;
+}
+
+.ency-cat-anti-jerawat {
+  --ency-accent: #ff5c8a;
+}
+
+.ency-cat-anti-aging {
+  --ency-accent: #9c67cf;
+}
+
+.ency-cat-eksfoliasi {
+  --ency-accent: #29b6f6;
+}
+
+.ency-cat-pelembap-barrier {
+  --ency-accent: #26c6a8;
+}
+
+.ency-cat-menenangkan {
+  --ency-accent: #66bb6a;
+}
+
+.ency-cat-antioksidan {
+  --ency-accent: #ff8a3d;
+}
+
+.ency-empty {
+  text-align: center;
+  padding: 28px 0;
+  font-weight: 700;
+  color: #9a6a85;
+}
+
+.ency-reset {
+  margin-top: 10px;
+  border: 0;
+  border-radius: 50px;
+  padding: 9px 22px;
+  background: linear-gradient(135deg, #4fc3f7, #0288d1);
+  color: #fff;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ency-disclaimer {
+  margin-top: clamp(14px, 2.4vw, 22px);
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255, 236, 179, 0.55);
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #a06a1f;
+  text-align: center;
+}
+
+/* ── Detail (modal / bottom sheet) ── */
+.ency-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(80, 20, 60, 0.5);
+  backdrop-filter: blur(3px);
+}
+
+.ency-sheet {
+  --ency-accent: #ff6fb3;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 640px);
+  max-height: min(100%, 860px);
+  background: linear-gradient(160deg, #fff5fa 0%, #fff 60%);
+  border: 4px solid color-mix(in srgb, var(--ency-accent) 60%, #fff);
+  border-radius: 28px;
+  box-shadow:
+    0 20px 60px rgba(233, 30, 140, 0.35),
+    inset 0 0 0 3px #fff;
+  overflow: hidden;
+  animation: ency-pop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes ency-pop {
+  from {
+    transform: translateY(24px) scale(0.96);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.ency-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6fb3, #e91e8c);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(233, 30, 140, 0.4);
+}
+
+.ency-sheet-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: clamp(16px, 4vw, 26px) clamp(16px, 4vw, 28px) 8px;
+  -webkit-overflow-scrolling: touch;
+  user-select: text;
+}
+
+.ency-detail-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-right: 38px;
+}
+
+.ency-detail-icon {
+  flex: none;
+  width: clamp(64px, 18vw, 88px);
+  height: clamp(64px, 18vw, 88px);
+  font-size: 2.4rem;
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--ency-accent) 14%, #fff);
+  border: 2.5px solid color-mix(in srgb, var(--ency-accent) 55%, #fff);
+  padding: 8px;
+}
+
+.ency-detail-titles h2 {
+  font-family: "Fredoka", "Baloo 2", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.2rem, 4.6vw, 1.7rem);
+  line-height: 1.15;
+  color: #c2185b;
+}
+
+.ency-aka {
+  margin-top: 2px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0288d1;
+}
+
+.ency-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.ency-lead {
+  margin: 14px 0 4px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--ency-accent) 14%, #fff);
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: #6a1b9a;
+}
+
+.ency-block {
+  margin-top: 16px;
+}
+
+.ency-block h3 {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 0.98rem;
+  color: #e91e8c;
+  margin-bottom: 6px;
+}
+
+.ency-block p {
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #5a4a66;
+}
+
+.ency-list {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.ency-list li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #5a4a66;
+}
+
+.ency-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 2px;
+  top: 0;
+  color: var(--ency-accent);
+}
+
+.ency-usage {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.ency-usage>div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 9px 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 2px dashed #ffb3d9;
+}
+
+.ency-usage span {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #9a6a85;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.ency-usage strong {
+  font-size: 0.82rem;
+  line-height: 1.3;
+  color: #0288d1;
+}
+
+.ency-skin {
+  margin-top: 8px;
+}
+
+.ency-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ency-pill {
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.ency-pill.is-good {
+  background: linear-gradient(180deg, #e8ffee, #c8f7d4);
+  color: #1b8a3f;
+  border: 2px solid #7ee89a;
+}
+
+.ency-pill.is-warn {
+  background: linear-gradient(180deg, #fff8e1, #ffe9b3);
+  color: #b8720a;
+  border: 2px solid #ffca28;
+}
+
+.ency-caution {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 236, 179, 0.5);
+}
+
+.ency-caution h3 {
+  color: #a06a1f;
+}
+
+.ency-zones {
+  margin-top: 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #9a6a85;
+}
+
+.ency-zone {
+  display: inline-block;
+  margin: 3px 4px 0 0;
+  padding: 3px 10px;
+  border-radius: 50px;
+  background: #fff;
+  border: 1.5px solid #b8e2ff;
+  color: #0872b8;
+}
+
+.ency-sheet-nav {
+  display: flex;
+  gap: 10px;
+  padding: 10px clamp(14px, 3vw, 22px) max(12px, env(safe-area-inset-bottom));
+  border-top: 2px dashed #ffd1e6;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.ency-sheet-nav button {
+  flex: 1;
+  border: 0;
+  border-radius: 50px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #4fc3f7, #0288d1);
+  color: #fff;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 700;
+  font-size: 0.86rem;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(2, 136, 209, 0.28);
+  transition: transform 0.15s;
+}
+
+.ency-sheet-nav button:hover {
+  transform: translateY(-2px);
+}
+
+.ency-pager {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .ency-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .ency-pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .ency-pager[x-cloak] {
+    display: none;
+  }
+
+  .ency-pager-btn {
+    padding: 8px 18px;
+    border: 0;
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(180deg, #ff6fae, #e91e8c);
+    cursor: pointer;
+  }
+
+  .ency-pager-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .ency-pager-info {
+    font-weight: 800;
+  }
+}
+
+/* HP: modal menjadi bottom sheet */
+@media (max-width: 640px) {
+  .ency-modal {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .ency-sheet {
+    width: 100%;
+    max-height: 92dvh;
+    border-radius: 26px 26px 0 0;
+    border-bottom-width: 0;
+  }
+
+  .ency-usage {
+    grid-template-columns: 1fr;
+  }
+
+  .ency-usage>div {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .ency-usage strong {
+    text-align: right;
+  }
+}
+
+/* Navbar HP (portrait): transparan seperti halaman lain */
+@media (max-width: 560px) {
+  .ency-topbar {
+    background: none !important;
+    backdrop-filter: none !important;
+    position: relative;
+    top: 0;
+  }
+}
+
+/* HP landscape pendek */
+@media (orientation: landscape) and (max-height: 520px) {
+  .ency-topbar {
+    min-height: 44px;
+    padding: 3px 14px;
+    margin-top: 4px;
+    position: relative;
+    top: 0;
+  }
+
+  .ency-topbar .logo-img-desktop {
+    height: 34px;
+  }
+
+  .ency-modal {
+    align-items: center;
+    padding: 8px;
+  }
+
+  .ency-sheet {
+    max-height: 100%;
+    border-radius: 22px;
+    border-bottom-width: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ency-sheet {
+    animation: none;
+  }
+
+  .ency-card,
+  .ency-chip {
+    transition: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   15. SETTINGS MODAL
+═══════════════════════════════════════════════════════ */
+.settings-card {
+  position: relative;
+  width: min(100%, 440px);
+  max-height: min(88dvh, 640px);
+  overflow-y: auto;
+  padding: 28px 24px 22px;
+  color: #6a1b9a;
+  background: linear-gradient(160deg, #fff5fa 0%, #fff 60%);
+  border: 4px solid #ffb3d9;
+  border-radius: 28px;
+  box-shadow:
+    0 18px 50px rgba(233, 30, 140, 0.3),
+    inset 0 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+.settings-title {
+  margin: 0 0 14px;
+  padding-right: 36px;
+  font: 800 clamp(1.3rem, 4vw, 1.6rem) "Fredoka", "Baloo 2", sans-serif;
+  color: #c2185b;
+}
+
+.settings-section {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 2px dashed #ffb3d9;
+  border-radius: 18px;
+}
+
+.settings-section h3 {
+  margin: 0 0 8px;
+  font: 800 0.95rem "Baloo 2", "Nunito", sans-serif;
+  color: #e91e8c;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #5a4a66;
+}
+
+.settings-row-col {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.settings-row-col label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings-row-col strong {
+  color: #0288d1;
+}
+
+.settings-range {
+  width: 100%;
+  accent-color: #e91e8c;
+  cursor: pointer;
+}
+
+.settings-switch {
+  position: relative;
+  flex: none;
+  width: 52px;
+  height: 30px;
+  border: 0;
+  border-radius: 999px;
+  background: #d9c7d4;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.settings-switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s;
+}
+
+.settings-switch[aria-checked="true"] {
+  background: linear-gradient(135deg, #1abfb0, #00a88c);
+}
+
+.settings-switch[aria-checked="true"]::after {
+  transform: translateX(22px);
+}
+
+.settings-steps {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.settings-steps li {
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #5a4a66;
+}
+
+.settings-about {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.55;
+  color: #7b668d;
+}
+
+@media (max-width: 560px) {
+  .settings-card {
+    padding: 26px 16px 18px;
+    border-radius: 24px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   16. SPLASH / LOADING
+═══════════════════════════════════════════════════════ */
+.splash {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background-color: #ffe4f3;
+  background-size: cover;
+  background-position: center;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.splash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 240, 248, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.splash.is-leaving {
+  opacity: 0;
+  transform: scale(1.04);
+}
+
+.splash-center {
+  position: relative;
+  z-index: 2;
+  width: min(86%, 380px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.splash-logo {
+  width: min(78%, 280px);
+  height: auto;
+  filter: drop-shadow(0 6px 14px rgba(233, 30, 140, 0.25));
+  animation: splash-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.splash-flask {
+  font-size: 3rem;
+  line-height: 1;
+  animation: splash-bounce 1.1s ease-in-out infinite;
+  filter: drop-shadow(0 6px 8px rgba(2, 136, 209, 0.25));
+}
+
+.splash-bar {
+  width: 100%;
+  height: 16px;
+  padding: 3px;
+  background: #fff;
+  border: 2px solid #ffb3d9;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(233, 30, 140, 0.15);
+  overflow: hidden;
+}
+
+.splash-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff6fb3, #e91e8c, #4fc3f7);
+  background-size: 200% 100%;
+  animation: splash-shine 1.2s linear infinite;
+}
+
+.splash-tip {
+  min-height: 1.4em;
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #c2185b;
+}
+
+.splash-percent {
+  font-family: "Fredoka", "Baloo 2", sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #0288d1;
+}
+
+.splash-bubble {
+  position: absolute;
+  bottom: -40px;
+  left: var(--x);
+  z-index: 1;
+  font-size: var(--s);
+  color: #ff8fc4;
+  opacity: 0;
+  animation: splash-rise var(--d) ease-in var(--w) infinite;
+}
+
+@keyframes splash-pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes splash-bounce {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(6deg);
+  }
+}
+
+@keyframes splash-shine {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes splash-rise {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translateY(-110vh) rotate(200deg);
+    opacity: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   17. LOGIN / REGISTER — versi kartu
+═══════════════════════════════════════════════════════ */
+.auth-wrap {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  overflow-y: auto;
+  background-color: #ffe4f3;
+  background-size: cover;
+  background-position: center;
+}
+
+.auth-card {
+  width: min(100%, 420px);
+  margin: auto;
+  padding: 24px 22px 20px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border: 4px solid #ffb3d9;
+  border-radius: 28px;
+  box-shadow:
+    0 18px 50px rgba(233, 30, 140, 0.28),
+    inset 0 0 0 3px #fff;
+  animation: splash-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.auth-logo {
+  display: block;
+  width: min(60%, 200px);
+  height: auto;
+  margin: 0 auto 10px;
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 4px;
+  background: #ffe9f3;
+  border-radius: 999px;
+}
+
+.auth-tab {
+  padding: 9px 0;
+  text-align: center;
+  text-decoration: none;
+  font: 800 0.92rem "Baloo 2", "Nunito", sans-serif;
+  color: #c2185b;
+  border-radius: 999px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.auth-tab.is-active {
+  color: #fff;
+  background: linear-gradient(135deg, #ff6fb3, #e91e8c);
+  box-shadow: 0 4px 12px rgba(233, 30, 140, 0.35);
+}
+
+.auth-lead {
+  margin: 12px 0 14px;
+  text-align: center;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #0288d1;
+}
+
+.auth-field {
+  margin-bottom: 12px;
+}
+
+.auth-field label {
+  display: block;
+  margin-bottom: 4px;
+  font: 800 0.82rem "Baloo 2", "Nunito", sans-serif;
+  color: #c2185b;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 11px 14px;
+  background: #fff;
+  border: 2px solid #ffd1e6;
+  border-radius: 14px;
+  outline: 0;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: max(16px, 0.95rem);
+  color: #6a1b9a;
+  user-select: text;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.auth-input:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.25);
+}
+
+.auth-pass {
+  position: relative;
+}
+
+.auth-pass .auth-input {
+  padding-right: 76px;
+}
+
+.auth-eye {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: #e8f6ff;
+  color: #0872b8;
+  font: 800 0.72rem "Baloo 2", sans-serif;
+  cursor: pointer;
+}
+
+.auth-error {
+  margin-top: 4px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #d32f2f;
+}
+
+.auth-remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #5a4a66;
+  cursor: pointer;
+}
+
+.auth-remember input {
+  accent-color: #e91e8c;
+  width: 16px;
+  height: 16px;
+}
+
+.auth-submit {
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  font: 800 1rem "Baloo 2", "Nunito", sans-serif;
+  letter-spacing: 0.06em;
+  background: linear-gradient(180deg, #ff6fae, #e91e8c);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.35),
+    0 5px 0 #b3146a;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.auth-submit:hover {
+  transform: translateY(-2px);
+}
+
+.auth-submit:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #b3146a;
+}
+
+.auth-switch {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #7b668d;
+}
+
+.auth-switch a {
+  color: #e91e8c;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .splash-logo,
+  .splash-flask,
+  .splash-bar-fill,
+  .splash-bubble,
+  .auth-card {
+    animation: none;
+  }
+
+  .splash-bubble {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   18. LOGIN / REGISTER — mengikuti gambar login.webp
+═══════════════════════════════════════════════════════ */
+.lg-wrap {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #ffd9ec;
+}
+
+.lg-stage {
+  --u: min(1.15vw, 11.5px);
+  --fh: calc(var(--u) * 3.5);
+  --gap: calc(var(--u) * 0.5);
+
+  /* lebar = menutupi layar penuh (tanpa ruang kiri/kanan) */
+  --w: max(100vw, calc(100dvh * 1672 / 941));
+  /* seberapa banyak kelebihan tinggi dipotong dari ATAS (0 = semua dari bawah, 0.5 = tengah) */
+  --anchor: 0.2;
+
+  position: absolute;
+  left: 50%;
+  top: calc((100dvh - var(--w) * 941 / 1672) * var(--anchor));
+  transform: translateX(-50%);
+  width: var(--w);
+  aspect-ratio: 1672 / 941;
+  container-type: inline-size;
+  background-color: #ffe4f3;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.lg-stage.lg-register {
+  --fh: calc(var(--u) * 2.8);
+  --gap: calc(var(--u) * 0.3);
+}
+
+.lg-register .lg-panel {
+  top: 20%;
+  height: 71%;
+}
+
+.lg-register .lg-sub {
+  margin-top: calc(var(--u) * 0.1);
+  margin-bottom: calc(var(--u) * 0.2);
+}
+
+.lg-register .lg-submit {
+  margin-top: calc(var(--u) * 0.5);
+}
+
+.lg-register .lg-switch {
+  margin-top: calc(var(--u) * 0.4);
+}
+
+.lg-register .lg-divider {
+  margin: calc(var(--u) * 0.4) 0 calc(var(--u) * 0.3);
+}
+
+.lg-logo {
+  position: absolute;
+  left: 70%;
+  top: 3.5%;
+  /* naikkan angkanya kalau mau logo lebih turun */
+  width: 31%;
+  height: auto;
+  transform: translateX(-50%);
+  z-index: 3;
+  filter: drop-shadow(0 6px 12px rgba(233, 30, 140, 0.25));
+  pointer-events: none;
+}
+
+/* Area krem di dalam buku */
+.lg-panel {
+  position: absolute;
+  left: 52.2%;
+  top: 31%;
+  width: 39.5%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: none;
+  z-index: 2;
+}
+
+.lg-panel::-webkit-scrollbar {
+  display: none;
+}
+
+.lg-inner {
+  width: 100%;
+  margin-block: auto;
+  padding: 0 calc(var(--u) * 2.4);
+}
+
+
+
+.lg-title {
+  text-align: center;
+  font: 800 calc(var(--u) * 1.25) / 1.1 "Baloo 2", "Nunito", sans-serif;
+  color: #e91e8c;
+}
+
+.lg-title span {
+  display: block;
+  font: 800 calc(var(--u) * 3.1) / 1.05 "Fredoka", "Baloo 2", sans-serif;
+  color: #e91e8c;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
+}
+
+.lg-sub {
+  margin: calc(var(--u) * 0.2) 0 calc(var(--u) * 0.5);
+  text-align: center;
+  font-size: calc(var(--u) * 1.15);
+  font-weight: 700;
+  color: #7b668d;
+}
+
+.lg-field {
+  position: relative;
+  margin-top: var(--gap);
+}
+
+.lg-ico {
+  position: absolute;
+  left: calc(var(--u) * 1.4);
+  top: 50%;
+  width: calc(var(--u) * 1.6);
+  height: calc(var(--u) * 1.6);
+  transform: translateY(-50%);
+  color: #9a6a85;
+  pointer-events: none;
+}
+
+.lg-input {
+  width: 100%;
+  height: var(--fh);
+  padding: 0 calc(var(--u) * 1.4) 0 calc(var(--u) * 4);
+  background: #fff;
+  border: 2px solid #ffd1e6;
+  border-radius: 999px;
+  outline: 0;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: max(16px, calc(var(--u) * 1.35));
+  color: #6a1b9a;
+  user-select: text;
+  box-shadow: 0 3px 10px rgba(233, 30, 140, 0.1);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.lg-input::placeholder {
+  color: #a89aa5;
+  font-weight: 600;
+}
+
+.lg-input:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.25);
+}
+
+.lg-input-pass {
+  padding-right: calc(var(--u) * 4.2);
+}
+
+.lg-eye {
+  position: absolute;
+  right: calc(var(--u) * 1);
+  top: 50%;
+  width: calc(var(--u) * 2.4);
+  height: calc(var(--u) * 2.4);
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #7b668d;
+  cursor: pointer;
+}
+
+.lg-eye svg {
+  width: calc(var(--u) * 1.6);
+  height: calc(var(--u) * 1.6);
+}
+
+.lg-error {
+  margin: calc(var(--u) * 0.2) 0 0 calc(var(--u) * 1.4);
+  font-size: max(11px, calc(var(--u) * 1.05));
+  font-weight: 700;
+  color: #d32f2f;
+}
+
+.lg-remember {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.7);
+  margin: calc(var(--u) * 0.6) 0 0 calc(var(--u) * 0.4);
+  font-size: max(12px, calc(var(--u) * 1.2));
+  font-weight: 700;
+  color: #5a4a66;
+  cursor: pointer;
+}
+
+.lg-remember input {
+  width: calc(var(--u) * 1.4);
+  height: calc(var(--u) * 1.4);
+  min-width: 14px;
+  min-height: 14px;
+  accent-color: #e91e8c;
+}
+
+.lg-submit {
+  position: relative;
+  width: 100%;
+  height: calc(var(--fh) * 1.05);
+  margin-top: calc(var(--u) * 0.7);
+  padding: 0 calc(var(--u) * 4.5) 0 calc(var(--u) * 2);
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  font: 800 max(15px, calc(var(--u) * 1.7)) "Baloo 2", "Nunito", sans-serif;
+  letter-spacing: 0.03em;
+  text-align: center;
+  background: linear-gradient(180deg, #ff6fae, #e91e8c);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.35),
+    0 3px 0 #b3146a,
+    0 6px 12px rgba(233, 30, 140, 0.3);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.lg-submit i {
+  position: absolute;
+  right: calc(var(--u) * 0.5);
+  top: 50%;
+  width: calc(var(--fh) * 0.78);
+  height: calc(var(--fh) * 0.78);
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: #e91e8c;
+  font-style: normal;
+  font-size: calc(var(--u) * 1.4);
+}
+
+.lg-submit:hover {
+  transform: translateY(-2px);
+}
+
+.lg-submit:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #b3146a;
+}
+
+/* Tombol Google */
+.lg-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--u) * 0.8);
+  width: 100%;
+  height: var(--fh);
+  margin-top: calc(var(--u) * 0.5);
+  background: #fff;
+  border: 2px solid #ffd1e6;
+  border-radius: 999px;
+  color: #5a4a66;
+  font: 800 max(14px, calc(var(--u) * 1.45)) "Baloo 2", "Nunito", sans-serif;
+  text-decoration: none;
+  box-shadow: 0 3px 10px rgba(233, 30, 140, 0.1);
+  transition:
+    transform 0.15s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.lg-google svg {
+  flex: none;
+  width: calc(var(--u) * 1.6);
+  height: calc(var(--u) * 1.6);
+  min-width: 16px;
+  min-height: 16px;
+}
+
+.lg-google:hover {
+  transform: translateY(-2px);
+  border-color: var(--pink);
+  box-shadow: 0 6px 14px rgba(233, 30, 140, 0.18);
+}
+
+.lg-switch {
+  margin-top: calc(var(--u) * 0.8);
+  text-align: center;
+  font-size: max(12px, calc(var(--u) * 1.2));
+  font-weight: 700;
+  color: #5a4a66;
+}
+
+.lg-switch a {
+  color: #e91e8c;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.lg-switch a:hover {
+  text-decoration: underline;
+}
+
+/* Baris Ingat saya + Lupa password */
+.lg-remember-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: calc(var(--u) * 0.6) 0 0;
+}
+
+.lg-forgot {
+  font-size: max(11px, calc(var(--u) * 1.1));
+  font-weight: 700;
+  color: #e91e8c;
+  text-decoration: none;
+}
+
+.lg-forgot:hover {
+  text-decoration: underline;
+}
+
+/* Divider 'atau masuk dengan' */
+.lg-divider {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.8);
+  margin: calc(var(--u) * 0.7) 0 calc(var(--u) * 0.6);
+  font-size: max(11px, calc(var(--u) * 1.0));
+  font-weight: 700;
+  color: #9a6a85;
+}
+
+.lg-divider::before,
+.lg-divider::after {
+  content: '';
+  flex: 1;
+  height: 1.5px;
+  background: rgba(233, 30, 140, 0.18);
+  border-radius: 2px;
+}
+
+/* Tombol Google — full width */
+.lg-google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--u) * 0.7);
+  width: 100%;
+  height: var(--fh);
+  margin-top: calc(var(--u) * 0.5);
+  padding: 0 calc(var(--u) * 4.5) 0 calc(var(--u) * 2);
+  border: 2px solid #ffd1e6;
+  border-radius: 999px;
+  background: #fff;
+  color: #444;
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: max(13px, calc(var(--u) * 1.4));
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
+  box-shadow: 0 3px 10px rgba(233, 30, 140, 0.08);
+}
+
+.lg-google-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--pink);
+  box-shadow: 0 6px 16px rgba(233, 30, 140, 0.18);
+}
+
+/* ── Elemen mobile-only: disembunyikan di desktop ── */
+.lg-logo-mobile,
+.lg-social-row,
+.lg-social-btn,
+.lg-forgot {
+  display: none;
+}
+
+/* ── HP portrait: form kompak di atas background mobile ── */
+@media (max-width: 900px) and (orientation: portrait) {
+
+  /* Sembunyikan Google btn full-width (diganti social row) */
+  .lg-google-btn {
+    display: none;
+  }
+
+  .lg-wrap {
+    overflow-y: auto;
+    place-items: stretch;
+  }
+
+  .lg-stage {
+    --u: min(2.3vw, 9px);
+    --fh: calc(var(--u) * 4.2);
+    --gap: calc(var(--u) * 0.65);
+
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    aspect-ratio: auto;
+    container-type: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0;
+    padding: 10px 10px 14px;
+    overflow-y: auto;
+    background-image: var(--lg-bg-mobile) !important;
+    background-size: cover;
+    background-position: center top;
+  }
+
+  .lg-stage.lg-register {
+    --fh: calc(var(--u) * 3.8);
+    --gap: calc(var(--u) * 0.5);
+  }
+
+  /* Logo besar tersembunyi */
+  .lg-logo {
+    display: none;
+  }
+
+  /* Panel jadi kartu floating */
+  .lg-panel {
+    position: static;
+    top: auto;
+    width: min(100%, 420px);
+    height: auto;
+    overflow: visible;
+    padding: 10px 14px 12px;
+    background:
+      linear-gradient(rgba(255, 182, 219, 0.12) 1px, transparent 1px) 0 0 / 20px 20px,
+      linear-gradient(90deg, rgba(255, 182, 219, 0.12) 1px, transparent 1px) 0 0 / 20px 20px,
+      rgba(255, 246, 240, 0.96);
+    border: 3px solid #ff8fc4;
+    border-radius: 22px;
+    box-shadow: 0 12px 32px rgba(233, 30, 140, 0.28), inset 0 0 0 2.5px #fff;
+    backdrop-filter: blur(8px);
+  }
+
+  .lg-register .lg-panel {
+    top: auto;
+    height: auto;
+  }
+
+  .lg-inner {
+    padding: 0;
+    margin-block: 0;
+  }
+
+  .lg-register .lg-inner {
+    margin-block: 0;
+  }
+
+  /* Logo kecil di atas form */
+  .lg-logo-mobile {
+    display: block;
+    position: relative;
+    z-index: 3;
+    width: min(60%, 240px);
+    height: auto;
+    margin: 0 auto -28px;
+    filter: drop-shadow(0 4px 8px rgba(233, 30, 140, 0.3));
+  }
+
+  .lg-panel {
+    padding-top: 36px;
+  }
+
+  /* Judul & sub compact */
+  .lg-title {
+    display: block;
+    font-size: calc(var(--u) * 1.6);
+    margin-bottom: 0;
+  }
+
+  .lg-title span {
+    display: block;
+    font-size: calc(var(--u) * 3.8);
+  }
+
+  .lg-sub {
+    display: block;
+    font-size: max(10px, calc(var(--u) * 1.35));
+    margin: 0 0 calc(var(--u) * 0.5);
+  }
+
+  .lg-register .lg-sub {
+    margin-bottom: calc(var(--u) * 0.3);
+  }
+
+  .lg-ico {
+    width: calc(var(--u) * 2.1);
+    height: calc(var(--u) * 2.1);
+    left: calc(var(--u) * 1.5);
+  }
+
+  .lg-input {
+    padding-left: calc(var(--u) * 4.6);
+  }
+
+  .lg-eye svg {
+    width: calc(var(--u) * 2.1);
+    height: calc(var(--u) * 2.1);
+  }
+
+  .lg-submit {
+    font-size: calc(var(--u) * 1.9);
+    margin-top: calc(var(--u) * 0.55);
+  }
+
+  /* Lupa password: tampil di mobile */
+  .lg-forgot {
+    display: inline;
+    font-size: max(10px, calc(var(--u) * 1.15));
+  }
+
+  /* Divider */
+  .lg-divider {
+    font-size: max(10px, calc(var(--u) * 1.05));
+    margin: calc(var(--u) * 0.45) 0 calc(var(--u) * 0.4);
+  }
+
+  /* Social row: Google + Apple side by side */
+  .lg-social-row {
+    display: flex;
+    gap: calc(var(--u) * 0.7);
+  }
+
+  .lg-social-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--u) * 0.55);
+    height: var(--fh);
+    border: 2px solid #ffd1e6;
+    border-radius: 999px;
+    background: #fff;
+    color: #444;
+    font-family: "Baloo 2", "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: max(12px, calc(var(--u) * 1.35));
+    text-decoration: none;
+    transition: transform 0.15s, border-color 0.2s;
+    box-shadow: 0 3px 8px rgba(233, 30, 140, 0.08);
+  }
+
+  .lg-social-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--pink);
+  }
+
+  /* Remember */
+  .lg-remember {
+    font-size: max(11px, calc(var(--u) * 1.2));
+  }
+
+  /* Switch */
+  .lg-switch {
+    margin-top: calc(var(--u) * 0.5);
+    font-size: max(11px, calc(var(--u) * 1.2));
+  }
+}
+
+/* Mobile kecil ≤ 430px */
+@media (max-width: 430px) and (orientation: portrait) {
+  .lg-stage {
+    --u: min(3.2vw, 9px);
+    --fh: calc(var(--u) * 4);
+    padding: 8px 8px 10px;
+  }
+
+  .lg-panel {
+    width: 100%;
+    border-radius: 18px;
+    padding: 36px 10px 10px;
+  }
+
+  .lg-logo-mobile {
+    width: min(62%, 210px);
+    margin: 0 auto -28px;
+  }
+}
+
+.settings-logout {
+  text-align: center;
+}
+
+.settings-logout-btn,
+.settings-logout-cancel {
+  font: inherit;
+  font-weight: 700;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 24px;
+  cursor: pointer;
+}
+
+.settings-logout-btn {
+  background: #ff6b8a;
+  color: #fff;
+  box-shadow: 0 3px 0 #d94b6b;
+}
+
+.settings-logout-cancel {
+  background: #e8f1f8;
+  color: #4a6a85;
+}
+
+.settings-logout-confirm p {
+  margin: 0 0 10px;
+  font-weight: 700;
+}
+
+.settings-logout-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+
+.settings-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 2px dashed #ffb3d9;
+  border-radius: 18px;
+}
+
+.settings-avatar {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 3px solid #ffd1e6;
+  border-radius: 50%;
+  color: #fff;
+  font: 700 1.3rem "Fredoka", "Baloo 2", sans-serif;
+  background: linear-gradient(135deg, #ff6fb3, #e91e8c);
+}
+
+.settings-profile-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-profile-info strong,
+.settings-profile-info span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.settings-profile-info strong {
+  font: 800 0.95rem "Baloo 2", "Nunito", sans-serif;
+  color: #6a1b9a;
+}
+
+.settings-profile-info span {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #7b668d;
+}
+
+.plan-badge {
+  flex: none;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font: 800 0.74rem "Baloo 2", "Nunito", sans-serif;
+  letter-spacing: 0.08em;
+}
+
+.plan-free {
+  color: #4a6a85;
+  background: #e8f1f8;
+  border: 2px solid #b8e2ff;
+}
+
+.plan-pro {
+  color: #fff;
+  background: linear-gradient(180deg, #ffd35c, #f0a43e);
+  border: 2px solid #ffe0a1;
+  box-shadow: 0 3px 0 #c98417;
+}
+
+
+.pay-wrap {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  padding: 16px;
+  overflow-y: auto;
+  background-color: #ffe4f3;
+  background-size: cover;
+  background-position: center;
+}
+
+.pay-card {
+  width: min(100%, 440px);
+  margin: auto;
+  padding: 26px 24px 22px;
+  text-align: center;
+  color: #6a1b9a;
+  background: linear-gradient(145deg, #fffefe, #f4e9ff);
+  border: 4px solid #d1a8ff;
+  border-radius: 30px;
+  box-shadow:
+    0 18px 50px rgba(73, 41, 111, 0.3),
+    inset 0 0 0 5px rgba(255, 255, 255, 0.75);
+}
+
+.pay-back {
+  display: block;
+  text-align: left;
+  font: 800 0.85rem "Baloo 2", "Nunito", sans-serif;
+  color: #9664c7;
+  text-decoration: none;
+}
+
+.pay-back-center {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.pay-crown {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  margin: 6px auto 8px;
+  border: 3px solid #ffe0a1;
+  border-radius: 50%;
+  font-size: 2.2rem;
+  background: linear-gradient(145deg, #fff4c7, #ffc15a);
+  box-shadow: 0 5px 12px rgba(238, 168, 48, 0.25);
+}
+
+.pay-kicker {
+  margin: 0 0 4px;
+  color: #a469dd;
+  font: 900 0.78rem "Baloo 2", "Nunito", sans-serif;
+  letter-spacing: 0.16em;
+}
+
+.pay-title {
+  margin: 0 0 12px;
+  color: #7545aa;
+  font: 800 clamp(1.4rem, 5vw, 1.8rem) "Baloo 2", "Nunito", sans-serif;
+}
+
+.pay-perks {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 6px;
+  text-align: left;
+  background: #fff;
+  border: 2px dashed #d1a8ff;
+  border-radius: 18px;
+}
+
+.pay-perks li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #5a4a66;
+}
+
+.pay-perks li::before {
+  content: "✦";
+  position: absolute;
+  left: 2px;
+  color: #f0a43e;
+}
+
+.pay-price {
+  margin-bottom: 14px;
+}
+
+.pay-price span {
+  display: block;
+  font: 800 2rem "Fredoka", "Baloo 2", sans-serif;
+  color: #e91e8c;
+}
+
+.pay-price small {
+  font-weight: 700;
+  color: #7b668d;
+}
+
+.pay-h2 {
+  margin: 0 0 8px;
+  text-align: left;
+  font: 800 0.95rem "Baloo 2", "Nunito", sans-serif;
+  color: #e91e8c;
+}
+
+.pay-single-method {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  text-align: left;
+  background: #fff0f8;
+  border: 2px solid #ff6fb3;
+  border-radius: 14px;
+  box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.2);
+}
+
+.pay-single-method strong {
+  font: 800 0.95rem "Baloo 2", "Nunito", sans-serif;
+  color: #c2185b;
+}
+
+.pay-single-method span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #7b668d;
+}
+
+.pay-bank {
+  margin-bottom: 12px;
+  padding: 14px;
+  background: #fff;
+  border: 2px solid #ffd1e6;
+  border-radius: 18px;
+}
+
+.pay-bank-name {
+  margin: 0;
+  font: 800 1rem "Baloo 2", sans-serif;
+  color: #0872b8;
+  letter-spacing: 0.08em;
+}
+
+.pay-bank-no {
+  margin: 2px 0;
+  font: 700 1.7rem "Fredoka", "Baloo 2", sans-serif;
+  color: #e91e8c;
+  letter-spacing: 0.06em;
+  user-select: all;
+}
+
+.pay-bank-holder {
+  margin: 0 0 10px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #5a4a66;
+}
+
+.pay-copy {
+  border: 0;
+  border-radius: 999px;
+  padding: 7px 18px;
+  font: 800 0.78rem "Baloo 2", sans-serif;
+  color: #0872b8;
+  background: #e8f6ff;
+  cursor: pointer;
+}
+
+.pay-alert {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #b3261e;
+  background: #ffe9e7;
+  border-radius: 14px;
+}
+
+.pay-upload {
+  display: grid;
+  place-items: center;
+  min-height: 130px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  background: #fff;
+  border: 2.5px dashed #d1a8ff;
+  border-radius: 18px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.pay-upload:hover,
+.pay-upload:focus-within {
+  border-color: #7845d7;
+  background: #faf5ff;
+}
+
+.pay-upload input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.pay-upload span {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: #7545aa;
+}
+
+.pay-upload small {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #9a8aa8;
+}
+
+.pay-upload img,
+.pay-proof-img {
+  display: block;
+  max-width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.pay-proof-img {
+  margin: 0 auto 14px;
+  border: 2px solid #ffd1e6;
+}
+
+.pay-method input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pay-method span {
+  display: block;
+  padding: 11px 8px;
+  font: 800 0.88rem "Baloo 2", "Nunito", sans-serif;
+  color: #5a4a66;
+  background: #fff;
+  border: 2px solid #ffd1e6;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.pay-method input:checked+span {
+  color: #c2185b;
+  background: #fff0f8;
+  border-color: #ff6fb3;
+  box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.25);
+}
+
+.pay-method input:focus-visible+span {
+  outline: 3px solid #7845d7;
+  outline-offset: 2px;
+}
+
+.pay-error {
+  margin: 6px 0 0;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #d32f2f;
+}
+
+.pay-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 2px 12px;
+  font-weight: 800;
+  color: #5a4a66;
+}
+
+.pay-total strong {
+  font-size: 1.15rem;
+  color: #e91e8c;
+}
+
+.pay-submit {
+  display: block;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+}
+
+.pay-summary {
+  margin: 0 0 12px;
+  padding: 6px 14px;
+  text-align: left;
+  background: #fff;
+  border: 2px dashed #d1a8ff;
+  border-radius: 18px;
+}
+
+.pay-summary div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.pay-summary dt {
+  color: #7b668d;
+}
+
+.pay-summary dd {
+  margin: 0;
+  color: #6a1b9a;
+  word-break: break-all;
+  text-align: right;
+}
+
+.pay-note {
+  margin: 0 0 14px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #7b668d;
+}
+
+.settings-admin-link {
+  display: block;
+  margin-top: 10px;
+  padding: 9px 14px;
+  text-align: center;
+  text-decoration: none;
+  font: 800 0.86rem "Baloo 2", "Nunito", sans-serif;
+  color: #0872b8;
+  background: #e8f6ff;
+  border: 2px solid #b8e2ff;
+  border-radius: 999px;
+}
+
+.adm-wrap {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  padding: 20px 16px 40px;
+  overflow-y: auto;
+  user-select: text;
+  background: #f7f2fb;
+  color: #3c2f4a;
+}
+
+.adm-shell {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.adm-narrow {
+  max-width: 860px;
+}
+
+.adm-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 6px 0 16px;
+}
+
+.adm-head h1 {
+  margin: 0;
+  font: 800 1.6rem "Baloo 2", "Nunito", sans-serif;
+  color: #7545aa;
+}
+
+.adm-head p {
+  margin: 2px 0 0;
+  font-weight: 700;
+  color: #7b668d;
+}
+
+.adm-link {
+  font: 800 0.86rem "Baloo 2", sans-serif;
+  color: #9664c7;
+  text-decoration: none;
+}
+
+.adm-flash {
+  margin-bottom: 14px;
+  padding: 11px 14px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #1b6e3c;
+  background: #e8ffee;
+  border: 2px solid #7ee89a;
+  border-radius: 14px;
+}
+
+.adm-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.adm-stat {
+  padding: 14px 16px;
+  background: #fff;
+  border: 2px solid #eadcf7;
+  border-radius: 18px;
+}
+
+.adm-stat span {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #7b668d;
+}
+
+.adm-stat strong {
+  display: block;
+  margin-top: 2px;
+  font: 800 1.5rem "Fredoka", "Baloo 2", sans-serif;
+  color: #7545aa;
+}
+
+.adm-stat-warn {
+  border-color: #ffca28;
+  background: #fffbea;
+}
+
+.adm-stat-warn strong {
+  color: #b8720a;
+}
+
+.adm-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.adm-tab {
+  padding: 7px 14px;
+  font: 800 0.84rem "Baloo 2", sans-serif;
+  color: #7545aa;
+  text-decoration: none;
+  background: #fff;
+  border: 2px solid #eadcf7;
+  border-radius: 999px;
+}
+
+.adm-tab small {
+  margin-left: 4px;
+  color: #9a8aa8;
+}
+
+.adm-tab.is-active {
+  color: #fff;
+  background: #7845d7;
+  border-color: #7845d7;
+}
+
+.adm-tab.is-active small {
+  color: #e6d6ff;
+}
+
+.adm-table-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border: 2px solid #eadcf7;
+  border-radius: 18px;
+}
+
+.adm-table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.adm-table th {
+  padding: 11px 14px;
+  text-align: left;
+  font: 800 0.76rem "Baloo 2", sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #7b668d;
+  background: #faf5ff;
+}
+
+.adm-table td {
+  padding: 11px 14px;
+  border-top: 1px solid #f0e6f8;
+  vertical-align: middle;
+}
+
+.adm-table td small {
+  display: block;
+  font-size: 0.76rem;
+  color: #9a8aa8;
+}
+
+.adm-empty {
+  padding: 26px 14px;
+  text-align: center;
+  font-weight: 700;
+  color: #9a8aa8;
+}
+
+.adm-badge {
+  display: inline-block;
+  padding: 3px 11px;
+  font: 800 0.74rem "Baloo 2", sans-serif;
+  border-radius: 999px;
+}
+
+.adm-pending {
+  color: #5a6a78;
+  background: #e8eef3;
+}
+
+.adm-awaiting_review {
+  color: #a06a1f;
+  background: #fff1c9;
+}
+
+.adm-paid {
+  color: #1b6e3c;
+  background: #d9f8e2;
+}
+
+.adm-rejected {
+  color: #b3261e;
+  background: #ffe0dd;
+}
+
+.adm-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  font: 800 0.84rem "Baloo 2", sans-serif;
+  color: #fff;
+  text-decoration: none;
+  background: #7845d7;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.adm-btn-ok {
+  background: #1f9d55;
+}
+
+.adm-btn-no {
+  background: #d64545;
+}
+
+.adm-pager {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 14px;
+  font-weight: 800;
+  font-size: 0.86rem;
+}
+
+.adm-pager a {
+  color: #7845d7;
+  text-decoration: none;
+}
+
+.adm-pager span {
+  color: #9a8aa8;
+}
+
+.adm-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.adm-box {
+  padding: 16px;
+  background: #fff;
+  border: 2px solid #eadcf7;
+  border-radius: 18px;
+}
+
+.adm-box h2 {
+  margin: 0 0 10px;
+  font: 800 1rem "Baloo 2", sans-serif;
+  color: #e91e8c;
+}
+
+.adm-dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+  border-top: 1px dashed #f0e6f8;
+  font-size: 0.88rem;
+}
+
+.adm-dl div:first-child {
+  border-top: 0;
+}
+
+.adm-dl dt {
+  font-weight: 700;
+  color: #7b668d;
+}
+
+.adm-dl dd {
+  margin: 0;
+  font-weight: 700;
+  text-align: right;
+  word-break: break-word;
+}
+
+.adm-proof {
+  display: block;
+  width: 100%;
+  max-height: 460px;
+  object-fit: contain;
+  background: #faf5ff;
+  border: 2px solid #eadcf7;
+  border-radius: 12px;
+}
+
+.adm-hint {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #9a8aa8;
+}
+
+.adm-check {
+  margin: 14px 0 0;
+  padding: 11px 14px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #a06a1f;
+  background: #fff6dc;
+  border-radius: 14px;
+}
+
+.adm-actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.adm-reject {
+  padding: 14px;
+  background: #fff;
+  border: 2px solid #eadcf7;
+  border-radius: 18px;
+}
+
+.adm-reject label {
+  display: block;
+  margin-bottom: 6px;
+  font: 800 0.86rem "Baloo 2", sans-serif;
+  color: #5a4a66;
+}
+
+.adm-reject textarea {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  font: 700 max(16px, 0.9rem) "Quicksand", sans-serif;
+  color: #3c2f4a;
+  border: 2px solid #ffd1e6;
+  border-radius: 12px;
+  resize: vertical;
+}
+
+.adm-error {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #d32f2f;
+}
+
+@media (max-width: 720px) {
+  .adm-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-head {
+    flex-direction: column;
+  }
+}
+
+.adm-flash-error {
+  color: #b3261e;
+  background: #ffe9e7;
+  border-color: #ff9d96;
+}
+
+.adm-search {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.adm-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 16px;
+  font: 700 max(16px, 0.9rem) "Quicksand", sans-serif;
+  color: #3c2f4a;
+  background: #fff;
+  border: 2px solid #eadcf7;
+  border-radius: 999px;
+  outline: 0;
+}
+
+.adm-search input:focus {
+  border-color: #7845d7;
+}
+
+.adm-btn-ghost {
+  color: #7545aa;
+  background: #f0e6f8;
+}
+
+.adm-actions>.adm-btn {
+  justify-self: start;
+}
+
+.adm-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(60, 30, 90, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.adm-modal-card {
+  width: min(100%, 440px);
+}
+
+.adm-modal-card h2 {
+  margin: 0 0 10px;
+  font: 800 1.1rem "Baloo 2", sans-serif;
+  color: #d64545;
+}
+
+.adm-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.adm-app {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  user-select: text;
+  background: #f7f2fb;
+  color: #3c2f4a;
+}
+
+/* ── Sidebar ── */
+.adm-side {
+  flex: none;
+  width: 248px;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 14px;
+  background: #fff;
+  border-right: 2px solid #eadcf7;
+  overflow-y: auto;
+}
+
+.adm-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 8px 18px;
+}
+
+.adm-brand img {
+  width: 100%;
+  max-width: 190px;
+  height: auto;
+}
+
+.adm-brand span {
+  align-self: stretch;
+  text-align: center;
+  padding-left: 0.14em;
+  font: 800 0.72rem "Baloo 2", sans-serif;
+  letter-spacing: 0.14em;
+  color: #a469dd;
+}
+
+.adm-nav {
+  display: grid;
+  gap: 4px;
+}
+
+.adm-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  font: 800 0.92rem "Baloo 2", "Nunito", sans-serif;
+  color: #5a4a66;
+  text-decoration: none;
+  border-radius: 14px;
+  transition: background 0.15s;
+}
+
+.adm-nav a i {
+  font-style: normal;
+}
+
+.adm-nav a:hover {
+  background: #f6eefc;
+}
+
+.adm-nav a.is-active {
+  color: #fff;
+  background: linear-gradient(135deg, #9b6bea, #7845d7);
+  box-shadow: 0 4px 12px rgba(120, 69, 215, 0.3);
+}
+
+.adm-count {
+  margin-left: auto;
+  min-width: 22px;
+  padding: 1px 7px;
+  text-align: center;
+  font: 800 0.72rem "Baloo 2", sans-serif;
+  color: #7a4d00;
+  background: #ffca28;
+  border-radius: 999px;
+}
+
+.adm-side-foot {
+  margin-top: auto;
+  display: grid;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 2px dashed #eadcf7;
+}
+
+.adm-user {
+  padding: 0 8px 6px;
+  min-width: 0;
+}
+
+.adm-user strong,
+.adm-user small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.adm-user strong {
+  font: 800 0.9rem "Baloo 2", sans-serif;
+  color: #6a1b9a;
+}
+
+.adm-user small {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #9a8aa8;
+}
+
+.adm-side-link {
+  display: block;
+  width: 100%;
+  padding: 9px 12px;
+  text-align: left;
+  font: 800 0.86rem "Baloo 2", sans-serif;
+  color: #7545aa;
+  text-decoration: none;
+  background: #f6eefc;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.adm-side-link:hover {
+  background: #eadcf7;
+}
+
+/* ── Area utama ── */
+.adm-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.adm-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px clamp(14px, 3vw, 32px) 40px;
+}
+
+.adm-content .adm-narrow {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.adm-topbar {
+  display: none;
+}
+
+.adm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: rgba(60, 30, 90, 0.45);
+}
+
+/* ── Komponen dashboard ── */
+a.adm-stat {
+  display: block;
+  text-decoration: none;
+}
+
+.adm-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.adm-chart {
+  display: flex;
+  gap: 8px;
+  height: 200px;
+}
+
+.adm-bar {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.adm-bar small {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #9a8aa8;
+  white-space: nowrap;
+}
+
+.adm-bar-track {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: #faf5ff;
+  border-radius: 10px 10px 0 0;
+}
+
+.adm-bar-fill {
+  width: 70%;
+  max-width: 40px;
+  background: linear-gradient(180deg, #b78cff, #7845d7);
+  border-radius: 8px 8px 0 0;
+}
+
+.adm-queue-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 4px;
+  color: inherit;
+  text-decoration: none;
+  border-top: 1px dashed #f0e6f8;
+}
+
+.adm-queue-item:first-of-type {
+  border-top: 0;
+}
+
+.adm-queue-item:hover {
+  background: #faf5ff;
+}
+
+.adm-queue-item strong {
+  display: block;
+  font-size: 0.9rem;
+}
+
+.adm-queue-item small {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #9a8aa8;
+}
+
+.adm-queue-item span {
+  font: 800 0.88rem "Baloo 2", sans-serif;
+  color: #e91e8c;
+  white-space: nowrap;
+}
+
+.adm-flat {
+  border: 0;
+  border-radius: 0;
+}
+
+.adm-box+.adm-box {
+  margin-top: 12px;
+}
+
+/* ── Mobile: sidebar jadi menu geser ── */
+@media (max-width: 860px) {
+  .adm-side {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 300;
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+    box-shadow: 8px 0 30px rgba(60, 30, 90, 0.25);
+  }
+
+  .adm-side.is-open {
+    transform: none;
+  }
+
+  .adm-topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: #fff;
+    border-bottom: 2px solid #eadcf7;
+    font: 800 1rem "Baloo 2", sans-serif;
+    color: #7545aa;
+  }
+
+  .adm-burger {
+    width: 38px;
+    height: 38px;
+    font-size: 1.3rem;
+    color: #7545aa;
+    background: #f6eefc;
+    border: 0;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 861px) {
+  .adm-backdrop {
+    display: none !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .adm-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.adm-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.adm-admin {
+  color: #fff;
+  background: #7845d7;
+}
+
+.adm-google {
+  color: #0872b8;
+  background: #e8f6ff;
+}
+
+.adm-self {
+  margin-left: 6px;
+  padding: 1px 8px;
+  font: 800 0.68rem "Baloo 2", sans-serif;
+  color: #a06a1f;
+  background: #fff1c9;
+  border-radius: 999px;
+}
+
+.adm-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.adm-row-actions form {
+  display: inline;
+}
+
+.adm-btn-sm {
+  padding: 5px 12px;
+  font-size: 0.76rem;
+}
+
+.adm-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.adm-modal-text {
+  margin: 0 0 14px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.55;
+  color: #5a4a66;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TAMBAHAN: ikon SVG + modal konfirmasi admin
+   (tempel di PALING BAWAH app.css)
+═══════════════════════════════════════════════════════ */
+.adm-ico {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+}
+
+/* Tombol dengan ikon */
+.adm-btn-ico {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.adm-btn-ico .adm-ico {
+  width: 15px;
+  height: 15px;
+}
+
+/* Sidebar */
+.adm-nav a i {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+}
+
+.adm-nav a i .adm-ico {
+  width: 20px;
+  height: 20px;
+}
+
+.adm-side-link:has(.adm-ico) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.adm-side-link .adm-ico {
+  width: 16px;
+  height: 16px;
+}
+
+.adm-burger {
+  display: grid;
+  place-items: center;
+}
+
+.adm-burger .adm-ico {
+  width: 22px;
+  height: 22px;
+}
+
+/* Modal konfirmasi */
+.adm-confirm-card {
+  text-align: center;
+  padding: 24px 22px 20px;
+}
+
+.adm-confirm-card h2 {
+  margin: 0 0 8px;
+  color: #6a1b9a;
+}
+
+.adm-confirm-card.is-danger h2 {
+  color: #d64545;
+}
+
+.adm-confirm-card .adm-modal-text {
+  margin-bottom: 18px;
+}
+
+.adm-confirm-card .adm-modal-actions {
+  justify-content: center;
+}
+
+.adm-confirm-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #7845d7;
+  background: #f0e6f8;
+}
+
+.adm-confirm-icon .adm-ico {
+  width: 28px;
+  height: 28px;
+}
+
+.adm-confirm-icon.is-ok {
+  color: #1f9d55;
+  background: #d9f8e2;
+}
+
+.adm-confirm-icon.is-warn {
+  color: #b8720a;
+  background: #fff1c9;
+}
+
+.adm-confirm-icon.is-danger {
+  color: #d64545;
+  background: #ffe0dd;
+}
+
+.settings-badges {
+  flex: none;
+  display: flex;
+  flex-direction: row;
+  /* sebelumnya column */
+  align-items: center;
+  /* sebelumnya flex-end */
+  gap: 6px;
+  /* sebelumnya 4px */
+}
+
+.plan-admin {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
+  background: linear-gradient(180deg, #9b6bea, #7845d7);
+  border: 2px solid #d1a8ff;
+  box-shadow: 0 3px 0 #5a2fb0;
+}
+
+.plan-admin .adm-ico {
+  width: 13px;
+  height: 13px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TAMBAHAN: RESPONSIF MOBILE DASHBOARD ADMIN
+   (tempel di PALING BAWAH app.css — setelah semua blok .adm-*)
+   Breakpoint: 860 (sidebar) · 760 (tabel jadi kartu) · 560 (HP) · 340 (HP kecil)
+═══════════════════════════════════════════════════════ */
+
+/* Modal: kartu tidak pernah lebih tinggi dari layar */
+.adm-modal-card {
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+
+/* ── Sidebar menu geser (≤ 860px) ── */
+@media (max-width: 860px) {
+  .adm-side {
+    width: min(86vw, 290px);
+    padding-top: max(18px, env(safe-area-inset-top));
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+    overscroll-behavior: contain;
+    /* bayangan hanya saat terbuka, supaya tidak bocor di tepi layar */
+    box-shadow: none;
+    /* tidak bisa difokus lewat keyboard saat tertutup */
+    visibility: hidden;
+    transition:
+      transform 0.22s ease,
+      box-shadow 0.22s ease,
+      visibility 0s linear 0.22s;
+  }
+
+  .adm-side.is-open {
+    visibility: visible;
+    box-shadow: 8px 0 30px rgba(60, 30, 90, 0.25);
+    transition:
+      transform 0.22s ease,
+      box-shadow 0.22s ease,
+      visibility 0s;
+  }
+
+  .adm-nav a {
+    min-height: 44px;
+  }
+
+  .adm-topbar {
+    min-height: 56px;
+    padding-top: max(10px, env(safe-area-inset-top));
+  }
+
+  .adm-topbar strong {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .adm-burger {
+    flex: none;
+    width: 44px;
+    height: 44px;
+  }
+
+  .adm-content {
+    padding: 16px max(14px, env(safe-area-inset-right)) 32px max(14px, env(safe-area-inset-left));
+  }
+
+  .adm-head h1 {
+    font-size: clamp(1.3rem, 5.5vw, 1.6rem);
+  }
+}
+
+/* ── Tabel jadi kartu (≤ 760px) ── */
+@media (max-width: 760px) {
+
+  /* Tombol lebih mudah disentuh */
+  .adm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    text-align: center;
+  }
+
+  .adm-btn-sm {
+    min-height: 36px;
+  }
+
+  .adm-table-wrap {
+    overflow: visible;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+  }
+
+  /* !important untuk menimpa style="min-width: …" yang ada di view */
+  .adm-table,
+  .adm-table tbody {
+    display: block;
+    width: 100%;
+    min-width: 0 !important;
+  }
+
+  /* Header kolom disembunyikan secara visual, tetap terbaca screen reader */
+  .adm-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .adm-table tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 14px;
+    margin-bottom: 10px;
+    padding: 14px;
+    background: #fff;
+    border: 2px solid #eadcf7;
+    border-radius: 18px;
+  }
+
+  .adm-table td {
+    display: block;
+    min-width: 0;
+    padding: 0;
+    border-top: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .adm-table td:first-child,
+  .adm-table td:last-child,
+  .adm-table td.adm-td-wide {
+    grid-column: 1 / -1;
+  }
+
+  /* Label kolom di atas nilainya */
+  .adm-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 2px;
+    font: 800 0.68rem "Baloo 2", sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #9a8aa8;
+  }
+
+  /* Sel terakhir = aksi */
+  .adm-table td:last-child {
+    padding-top: 10px;
+    border-top: 1px dashed #f0e6f8;
+  }
+
+  .adm-table td:last-child>.adm-btn {
+    width: 100%;
+  }
+
+  .adm-row-actions {
+    gap: 8px;
+  }
+
+  .adm-row-actions .adm-btn {
+    flex: 1 1 calc(50% - 8px);
+  }
+
+  /* Baris "tidak ada data" */
+  .adm-table td.adm-empty {
+    padding: 26px 0;
+    border-top: 0;
+  }
+
+  .adm-pager {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+/* ── HP (≤ 560px) ── */
+@media (max-width: 560px) {
+
+  /* Statistik: 2 kolom */
+  .adm-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .adm-stat {
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .adm-stat span {
+    font-size: 0.72rem;
+  }
+
+  .adm-stat strong {
+    font-size: clamp(1.05rem, 5.2vw, 1.3rem);
+    overflow-wrap: anywhere;
+  }
+
+  /* Tab filter & pencarian */
+  .adm-tabs {
+    gap: 6px;
+  }
+
+  .adm-tab {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .adm-search {
+    flex-wrap: wrap;
+  }
+
+  .adm-search input {
+    flex: 1 1 100%;
+  }
+
+  .adm-search .adm-btn {
+    flex: 1 1 0;
+  }
+
+  /* Kotak & dashboard */
+  .adm-box {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .adm-box h2 {
+    font-size: 0.95rem;
+  }
+
+  /* Grafik: bisa digeser kalau batangnya banyak */
+  .adm-chart {
+    gap: 4px;
+    height: 170px;
+    overflow-x: auto;
+  }
+
+  .adm-bar {
+    flex: 1 0 28px;
+  }
+
+  .adm-bar small {
+    font-size: 0.62rem;
+  }
+
+  .adm-queue-item {
+    gap: 8px;
+  }
+
+  .adm-queue-item>*:first-child {
+    min-width: 0;
+  }
+
+  .adm-queue-item strong,
+  .adm-queue-item small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Halaman detail pesanan */
+  .adm-dl div {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .adm-dl dd {
+    text-align: left;
+  }
+
+  .adm-proof {
+    max-height: 360px;
+  }
+
+  .adm-check {
+    font-size: 0.82rem;
+  }
+
+  .adm-reject>.adm-btn,
+  .adm-actions>.adm-btn {
+    width: 100%;
+    min-height: 44px;
+    justify-self: stretch;
+  }
+
+  /* Modal: tombol bertumpuk, aksi utama di atas */
+  .adm-modal {
+    padding: 12px;
+  }
+
+  .adm-modal-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .adm-modal-actions .adm-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .adm-confirm-card {
+    padding: 20px 16px 16px;
+  }
+}
+
+/* ── HP sangat kecil (≤ 340px) ── */
+@media (max-width: 340px) {
+  .adm-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-table tr {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .adm-row-actions .adm-btn {
+    flex-basis: 100%;
+  }
+
+  .adm-content {
+    padding-inline: 10px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   TAMBAHAN: kartu statistik selalu 2 kolom di HP & tablet
+   (tempel di PALING BAWAH app.css, setelah tambahan-responsif-admin)
+═══════════════════════════════════════════════════════ */
+@media (max-width: 860px) {
+  .adm-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Jumlah kartu ganjil: kartu terakhir melebar penuh, tidak menggantung */
+  .adm-stats>:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   TAMBAHAN: tab filter rapi di HP (grid 2 kolom, tinggi seragam)
+   (tempel di PALING BAWAH app.css)
+═══════════════════════════════════════════════════════ */
+@media (max-width: 560px) {
+  .adm-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .adm-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 42px;
+    padding: 6px 8px;
+    text-align: center;
+    font-size: 0.78rem;
+    line-height: 1.15;
+  }
+
+  /* Jumlah: bentuk pil kecil */
+  .adm-tab small {
+    flex: none;
+    min-width: 20px;
+    margin-left: 0;
+    padding: 1px 6px;
+    font-size: 0.7rem;
+    text-align: center;
+    background: #f0e6f8;
+    border-radius: 999px;
+  }
+
+  .adm-tab.is-active small {
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  /* Jumlah tab ganjil: tab terakhir melebar penuh */
+  .adm-tabs>:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+.icon {
+  width: 1.15em;
+  height: 1.15em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.icon[hidden] {
+  display: none;
+}
+
+.site-title,
+.music-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+}
